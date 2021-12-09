@@ -1,8 +1,18 @@
+import { useState, useEffect } from "react";
 import logo from "./logo.svg";
-import "./App.css";
+import "./App.scss";
 
 import Router from "./Router/Router";
+
 function App() {
+
+  const [stateUserTheme, setStateUserTheme] = useState("dark");
+
+  useEffect(() => {
+    document.documentElement.className = "";
+    document.documentElement.classList.add(`theme-${stateUserTheme}`);
+  }, [stateUserTheme]);
+
   return (
     <div className="App">
       <Router />
