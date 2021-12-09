@@ -5,7 +5,7 @@ import Router from "./Router/Router";
 
 function App() {
 
-  const [stateUserTheme, setStateUserTheme] = useState("dark");
+  const [stateUserTheme, setStateUserTheme] = useState("lightr");
 
   useEffect(() => {
     document.documentElement.className = "";
