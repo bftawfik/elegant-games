@@ -1,0 +1,10 @@
+@import "../../SharedStyles/variables";
+
+.Home {
+  min-width: 100%;
+  min-height: 100vh;
+  height: 100vh;
+  font-family: $font-family;
+  position: relative;
+  background-color: brown;
+}
