@@ -1,6 +1,9 @@
-$font-nunito-sans: 'Nunito Sans', sans-serif;
+$font-pattay: 'Pattaya', sans-serif;
+$font-work-sans: 'Work Sans', sans-serif;
+$font-mirza: 'Mirza', cursive;
+$font-family: $font-mirza;
 
-$font-family: $font-nunito-sans;
+$base-font-size: 14.667;
 
 $max-width: 1440px;
 $web-side-space: 80px;
@@ -11,3 +14,6 @@ $clr-very-dark-blue-2: hsl(200, 15%, 8%);
 $clr-dark-gray: hsl(0, 0%, 52%);
 $clr-very-light-gray: hsl(0, 0%, 98%);
 $clr-white: hsl(0, 0%, 100%);
+
+$clr-001: #f946f2;
+$clr-002: #162522;
