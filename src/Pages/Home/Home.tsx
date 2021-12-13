@@ -1,6 +1,6 @@
 import StartNow from '../../Components/StartNow/StartNow'
 
-import * as classes from "./Home.module.scss";
+import  classes from "./Home.module.scss";
 
 const Home = () => {
   return <div className={classes.Home}>

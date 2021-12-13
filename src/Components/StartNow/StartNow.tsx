@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-import * as classes from "./StartNow.module.scss";
+import classes from "./StartNow.module.scss";
 
 const StartNow = () => {
-  const [started, setStarted] = useState(undefined);
+  const [started, setStarted] = useState<Boolean | undefined>(undefined);
   return (
     <div
       className={[
