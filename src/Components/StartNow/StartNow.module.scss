@@ -27,6 +27,7 @@
         padding: 0;
         margin: 0;
         padding-top: 50%;
+        color: $clr-white;
         .icon {
           display: flex;
         }
@@ -45,11 +46,18 @@
       h2,
       button .msg {
         display: inline-block;
+        animation-name: fadeIn95;
+        animation-timing-function: ease-out;
+        animation-duration: 600ms;
       }
       button {
         padding: 0 emsToPx(2.5);
         margin: 15px;
         background-color: $clr-white;
+        color: $clr-002;
+        animation-name: bgColorIn95;
+        animation-timing-function: ease-out;
+        animation-duration: 600ms;
         .icon {
           display: none;
         }
@@ -97,9 +105,11 @@
       background-color: $clr-white;
       color: $clr-002;
       cursor: pointer;
+      span {
+        color: inherit;
+      }
       .icon {
         display: none;
-        color: $clr-white;
       }
     }
   }
@@ -136,16 +146,35 @@
   }
 }
 
-
-@keyframes show {
+@keyframes fadeIn95 {
   0% {
-    width: emsToPx(6);
-    height: emsToPx(6);
-    top: 0;
+    opacity: 0;
+  }
+  95% {
+    opacity: 0;
   }
   100% {
-    width: emsToPx(35);
-    height: emsToPx(35);
-    top: 50%;
+    opacity: 1;
+  }
+}
+
+@keyframes bgColorIn95 {
+  0% {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    color: $clr-white;
+  }
+  20% {
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    color: $clr-white;
+  }
+  100% {
+    padding: 0 emsToPx(2.5);
+    margin: 15px;
+    background-color: $clr-white;
+    color: $clr-002;
   }
 }
