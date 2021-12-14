@@ -2,14 +2,14 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
-import classes from "./StartNow.module.scss";
+import classes from "./Header.module.scss";
 
-const StartNow = () => {
+const Header = () => {
   const [started, setStarted] = useState<Boolean | undefined>(undefined);
   return (
     <div
       className={[
-        classes.StartNow,
+        classes.Header,
         started === undefined
           ? undefined
           : started
@@ -36,4 +36,4 @@ const StartNow = () => {
   );
 };
 
-export default StartNow;
+export default Header;
