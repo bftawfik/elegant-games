@@ -1,31 +1,37 @@
-import { useState } from "react";
 import classes from "./Backdrop.module.scss";
-
+import { percentToHex } from "../../Services/Helpers";
 type backdropProps = {
   zndx?: number;
-  opacity?: number;
-  backgroundColor?: string;
+  bgOpacity?: number;
+  backgroundColorHex?: string;
+  showBackdrop: boolean | undefined;
+  setShowBackdrop: Function;
 };
 
-const Backdrop = ({ zndx, opacity, backgroundColor }: backdropProps) => {
-  const [fadeOut, setFadeOut] = useState(false);
-  const [hide, setHide] = useState(false);
+const Backdrop = ({
+  zndx = 1000,
+  bgOpacity = 0.85,
+  backgroundColorHex = "#FFFFFF",
+  showBackdrop,
+  setShowBackdrop,
+}: backdropProps) => {
   return (
     <button
       className={[
         classes.Backdrop,
-        fadeOut ? classes.fadeOut : undefined,
-        hide ? classes.hide : undefined,
+        showBackdrop
+          ? classes.fadeIn
+          : showBackdrop === false
+          ? classes.fadeOut
+          : undefined,
       ].join(" ")}
       style={{
         zIndex: zndx,
-        backgroundColor: `rgba(${backgroundColor}, ${opacity})`,
+        backgroundColor: `${backgroundColorHex}${percentToHex(bgOpacity)}`,
       }}
-      onClick={() => {
-        setFadeOut(true);
-        setTimeout(() => {
-          setHide(true);
-        }, 1000);
+      onClick={(e) => {
+        e.stopPropagation();
+        setShowBackdrop(false);
       }}
     />
   );
