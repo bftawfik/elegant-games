@@ -16,7 +16,10 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/game/:gameId" element={<SingleGame />} />
+        <Route path="/games/" element={<Home />} />
+        <Route path="/privacy/" element={<Home />} />
+        <Route path="/terms/" element={<Home />} />
+        <Route path="/games/:gameId" element={<SingleGame />} />
         <Route path="/cancel" element={<Unsubscribe />} />
         <Route path="*" element={<Missing />} />
       </Routes>
