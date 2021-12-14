@@ -9,8 +9,16 @@ type typeSingleSocialIconData = {
 
 type typeSocialIcons = typeSingleSocialIconData[] | undefined;
 
+type typeSingleInternalLinkData = {
+  name: string;
+  url: string;
+};
+
+type typeInternalLinks = typeSingleInternalLinkData[] | undefined;
+
 type typeAppProviderValue = {
   socialIcons?: typeSocialIcons;
+  internalLinks?: typeInternalLinks;
 };
 
 type typeBackdropProps = {
@@ -28,12 +36,12 @@ type typeFulscrnWrpr = {
   style?: object;
 };
 
-
 // type alltypes = typeSingleSocialIconData &
 //   typeSocialIcons &
 //   typeAppProviderValue;
 export type {
   typeSocialIcons,
+  typeInternalLinks,
   typeAppProviderValue,
   typeBackdropProps,
   typeFulscrnWrpr,
