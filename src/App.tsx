@@ -5,11 +5,11 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
-import type { typeSocialIcons } from "./Types";
+import type { typeSocialIcons, typeInternalLinks } from "./Types";
 
-import StaticDataProvider from "./Components/AppDataProvider/AppDataProvider";
 import Router from "./Router/Router";
 
+import StaticDataProvider from "./Components/AppDataProvider/AppDataProvider";
 
 import "./App.scss";
 
@@ -40,6 +40,25 @@ const socialIcons: typeSocialIcons = [
   },
 ];
 
+const internalLinks: typeInternalLinks = [
+  {
+    name: "الرئيسية",
+    url: "/",
+  },
+  {
+    name: "الالعاب",
+    url: "/games",
+  },
+  {
+    name: "الخصوصية",
+    url: "/privacy",
+  },
+  {
+    name: "الشروط والاحكام",
+    url: "/terms",
+  },
+];
+
 function App() {
   // const [stateUserTheme, setStateUserTheme] = useState("lightr");
 
@@ -50,7 +69,7 @@ function App() {
 
   return (
     <div className="App">
-      <StaticDataProvider value={{ socialIcons }}>
+      <StaticDataProvider value={{ socialIcons, internalLinks }}>
         <Router />
       </StaticDataProvider>
     </div>
