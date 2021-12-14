@@ -2,28 +2,33 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
+import Backdrop from "../Backdrop/Backdrop";
+
 import classes from "./Header.module.scss";
 
 const Header = () => {
-  const [started, setStarted] = useState<Boolean | undefined>(undefined);
+  const [showHeader, setShowHeader] = useState<boolean | undefined>(undefined);
   return (
-    <div
-      className={[
-        classes.Header,
-        started === undefined
-          ? undefined
-          : started
-          ? classes.shrink
-          : classes.grow,
-      ].join(" ")}
-    >
-      <div className={classes.contents}>
+    <>
+      <Backdrop
+        showBackdrop={showHeader === undefined ? showHeader : !showHeader}
+      />
+      <div
+        className={[
+          classes.Header,
+          showHeader
+            ? classes.shrink
+            : showHeader === false
+            ? classes.grow
+            : undefined,
+        ].join(" ")}
+      >
         <h1>Elegant Games</h1>
         <h2>العب عدد مرات غير محدود اكثر من 40 لعبة</h2>
         <h2>بإشتراك واحد.</h2>
         <button
           onClick={() => {
-            setStarted(!started);
+            setShowHeader(!showHeader);
           }}
         >
           <span className={classes.msg}>ابدء الان</span>
@@ -32,7 +37,7 @@ const Header = () => {
           </span>
         </button>
       </div>
-    </div>
+    </>
   );
 };
 
