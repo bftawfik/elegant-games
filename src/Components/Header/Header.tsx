@@ -10,16 +10,14 @@ const Header = () => {
   const [showHeader, setShowHeader] = useState<boolean | undefined>(undefined);
   return (
     <>
-      <Backdrop
-        showBackdrop={showHeader === undefined ? showHeader : !showHeader}
-      />
+      <Backdrop showBackdrop={showHeader} />
       <div
         className={[
           classes.Header,
           showHeader
-            ? classes.shrink
-            : showHeader === false
             ? classes.grow
+            : showHeader === false
+            ? classes.shrink
             : undefined,
         ].join(" ")}
       >
@@ -28,7 +26,11 @@ const Header = () => {
         <h2>بإشتراك واحد.</h2>
         <button
           onClick={() => {
-            setShowHeader(!showHeader);
+            if (showHeader === undefined) {
+              setShowHeader(false);
+            } else {
+              setShowHeader(!showHeader);
+            }
           }}
         >
           <span className={classes.msg}>ابدء الان</span>
