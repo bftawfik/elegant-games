@@ -31,7 +31,7 @@ const Footer = () => {
         className={classes.toggleFooter}
         onClick={() => {
           if (showFooter === undefined) {
-            setShowFooter(false);
+            setShowFooter(true);
           } else {
             setShowFooter(!showFooter);
           }
@@ -48,7 +48,7 @@ const Footer = () => {
             أكثر من 40 لعبة في انتظارك اشترك وابدأ اللعب الآن ... ألعاب جديدة
             وتحديات جديدة كل يوم.
           </p>
-          <ul>
+          <ul className={classes.internalLinks}>
             {internalLinks &&
               internalLinks.map(({ name, url }, ndx) => (
                 <>
