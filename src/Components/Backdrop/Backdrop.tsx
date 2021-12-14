@@ -5,7 +5,7 @@ type backdropProps = {
   bgOpacity?: number;
   backgroundColorHex?: string;
   showBackdrop: boolean | undefined;
-  setShowBackdrop: Function;
+  onClickHandler?: React.MouseEventHandler | undefined;
 };
 
 const Backdrop = ({
@@ -13,7 +13,7 @@ const Backdrop = ({
   bgOpacity = 0.85,
   backgroundColorHex = "#FFFFFF",
   showBackdrop,
-  setShowBackdrop,
+  onClickHandler,
 }: backdropProps) => {
   return (
     <button
@@ -29,10 +29,7 @@ const Backdrop = ({
         zIndex: zndx,
         backgroundColor: `${backgroundColorHex}${percentToHex(bgOpacity)}`,
       }}
-      onClick={(e) => {
-        e.stopPropagation();
-        setShowBackdrop(false);
-      }}
+      onClick={onClickHandler}
     />
   );
 };
