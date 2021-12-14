@@ -1,16 +1,15 @@
-import * as defaultStyles from "./FulscrnWrpr.module.scss";
+import classes from "./FulscrnWrpr.module.scss";
+import type { typeFulscrnWrpr } from "../../Types";
 
-const FulscrnWrpr = ({ children, className, containerClassName, style }) => {
-  const styles = defaultStyles;
-
+const FulscrnWrpr = ({
+  children,
+  className,
+  containerClassName,
+  style,
+}: typeFulscrnWrpr) => {
   return (
-    <div
-      className={[styles.FulscrnWrpr, className].join(" ")}
-      style={style}
-    >
-      <div
-        className={[styles.container, containerClassName].join(" ")}
-      >
+    <div className={[classes.FulscrnWrpr, className].join(" ")} style={style}>
+      <div className={[classes.container, containerClassName].join(" ")}>
         {children}
       </div>
     </div>

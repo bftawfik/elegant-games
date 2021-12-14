@@ -1,12 +1,7 @@
 import classes from "./Backdrop.module.scss";
 import { percentToHex } from "../../Services/Helpers";
-type backdropProps = {
-  zndx?: number;
-  bgOpacity?: number;
-  backgroundColorHex?: string;
-  showBackdrop: boolean | undefined;
-  onClickHandler?: React.MouseEventHandler | undefined;
-};
+
+import type { typeBackdropProps } from "../../Types";
 
 const Backdrop = ({
   zndx = 1000,
@@ -14,7 +9,7 @@ const Backdrop = ({
   backgroundColorHex = "#FFFFFF",
   showBackdrop,
   onClickHandler,
-}: backdropProps) => {
+}: typeBackdropProps) => {
   return (
     <button
       className={[
