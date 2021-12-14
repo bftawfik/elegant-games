@@ -11,7 +11,8 @@ import classes from "./Footer.module.scss";
 import type { typeAppProviderValue } from "../../Types";
 
 const Footer = () => {
-  const { socialIcons }: typeAppProviderValue = useContext(AppDataContext);
+  const { socialIcons, internalLinks }: typeAppProviderValue =
+    useContext(AppDataContext);
   const [showFooter, setShowFooter] = useState<boolean | undefined>(undefined);
 
   return (
@@ -48,13 +49,15 @@ const Footer = () => {
             وتحديات جديدة كل يوم.
           </p>
           <ul>
-            <li>0</li>
-            <span>-</span>
-            <li>1</li>
-            <span>-</span>
-            <li>2</li>
-            <span>-</span>
-            <li>3</li>
+            {internalLinks &&
+              internalLinks.map(({ name, url }, ndx) => (
+                <>
+                  <li key={ndx}>
+                    <Link to={url}>{name}</Link>
+                  </li>
+                  {ndx + 1 < internalLinks.length && <span>-</span>}
+                </>
+              ))}
           </ul>
         </div>
         <div className={classes.footerCol}>
