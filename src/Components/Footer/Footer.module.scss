@@ -56,19 +56,22 @@
           }
           li {
             display: flex;
-            margin: 15px;
             a {
               color: inherit;
               text-decoration: none;
+              margin: 5px;
               &:hover {
                 text-decoration: underline;
               }
+            }
+            span {
+              margin: 5px;
             }
           }
         }
       }
       &:last-child {
-        border-top: 1px solid $clr-white;
+        border-top: 1px solid #444444;
         P {
           margin: 10px 0 5px;
         }
