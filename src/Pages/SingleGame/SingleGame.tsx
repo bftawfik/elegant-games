@@ -1,12 +1,15 @@
+import { useParams } from "react-router-dom";
+
 import classes from "./SingleGame.module.scss";
 
 const SingleGame = () => {
+  let { gameId } = useParams(); 
   return (
-    <div className={classes.SingleGame}> 
+    <div className={classes.SingleGame}>
       <iframe
-        src="https://elegant.games/"
-        title="W3Schools Free Online Web Tutorials"
-      ></iframe>
+        src={`https://www.ourfastcdn.com/elegantgames/mygames/${gameId}/HTML5-Game/index.html`}
+        title={gameId}
+      />
     </div>
   );
 };
