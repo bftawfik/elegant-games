@@ -23,7 +23,6 @@ const Header = () => {
       ? headerCases.SHOW_WITHOUT_ANIMATION
       : headerCases.HIDE_WITHOUT_ANIMATION
   );
-  console.log(showHeader);
 
   return (
     <>
