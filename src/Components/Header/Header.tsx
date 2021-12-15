@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,7 +9,11 @@ import Backdrop from "../Backdrop/Backdrop";
 import classes from "./Header.module.scss";
 
 const Header = () => {
+  
+  const navigate = useNavigate();
+
   const [showHeader, setShowHeader] = useState<boolean | undefined>(undefined);
+
   return (
     <>
       <Backdrop showBackdrop={showHeader} />
@@ -26,6 +32,7 @@ const Header = () => {
         <h2>بإشتراك واحد.</h2>
         <button
           onClick={() => {
+            navigate("/");
             if (showHeader === undefined) {
               setShowHeader(false);
             } else {
