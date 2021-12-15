@@ -1,4 +1,5 @@
 import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
+import React from "react";
 
 type typeSingleSocialIconData = {
   name: string;
@@ -19,6 +20,7 @@ type typeInternalLinks = typeSingleInternalLinkData[] | undefined;
 type typeAppProviderValue = {
   socialIcons?: typeSocialIcons;
   internalLinks?: typeInternalLinks;
+  listData?: typeGameListData;
 };
 
 type typeBackdropProps = {
@@ -36,13 +38,29 @@ type typeFulscrnWrpr = {
   style?: object;
 };
 
+type typeSingleGameData = {
+  name?: string;
+  gameId?: string;
+  imgUrl?: string;
+};
+
+type typeGameListData = typeSingleGameData[];
+
+type typeGamesGrid = {
+  card: any;
+};
+
 // type alltypes = typeSingleSocialIconData &
 //   typeSocialIcons &
 //   typeAppProviderValue;
+
 export type {
   typeSocialIcons,
   typeInternalLinks,
   typeAppProviderValue,
   typeBackdropProps,
   typeFulscrnWrpr,
+  typeSingleGameData,
+  typeGameListData,
+  typeGamesGrid,
 };
