@@ -23,6 +23,7 @@ type typeAppProviderValue = {
   listData?: typeGameListData;
   termsData?: typeTermsData;
   privacyData?: typePrivacyData;
+  gamesData?: typeGamesData;
 };
 
 type typeBackdropProps = {
@@ -41,14 +42,14 @@ type typeFulscrnWrpr = {
 };
 
 type typeSingleGameData = {
-  name?: string;
   gameId?: string;
-  imgUrl?: string;
 };
 
 type typeGameListData = typeSingleGameData[];
 
 type typeTermsData = string[];
+
+type typeGamesData = string[];
 
 type typeGamesGrid = {
   card: any;
@@ -71,4 +72,5 @@ export type {
   typeGamesGrid,
   typeTermsData,
   typePrivacyData,
+  typeGamesData,
 };
