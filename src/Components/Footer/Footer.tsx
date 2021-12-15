@@ -51,12 +51,10 @@ const Footer = () => {
           <ul className={classes.internalLinks}>
             {internalLinks &&
               internalLinks.map(({ name, url }, ndx) => (
-                <>
-                  <li key={ndx}>
-                    <Link to={url}>{name}</Link>
-                  </li>
+                <li key={ndx}>
+                  <Link to={url}>{name}</Link>
                   {ndx + 1 < internalLinks.length && <span>-</span>}
-                </>
+                </li>
               ))}
           </ul>
         </div>
@@ -71,7 +69,7 @@ const Footer = () => {
                       <FontAwesomeIcon icon={icon} />
                     </a>
                   ) : (
-                    <Link to={url}>
+                    <Link to={url} key={ndx}>
                       <FontAwesomeIcon icon={icon} />
                     </Link>
                   )}
