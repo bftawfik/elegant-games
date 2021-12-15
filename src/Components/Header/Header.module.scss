@@ -50,6 +50,26 @@
       display: none;
     }
   }
+  &.hide {
+    width: emsToPx(6);
+    height: emsToPx(6);
+    top: 0;
+    h1,
+    h2,
+    button .msg {
+      display: none;
+    }
+    button {
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+      padding-top: 50%;
+      color: $clr-white;
+      .icon {
+        display: flex;
+      }
+    }
+  }
   &.shrink {
     width: emsToPx(6);
     height: emsToPx(6);
