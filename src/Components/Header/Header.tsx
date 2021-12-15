@@ -50,14 +50,24 @@ const Header = () => {
         <h2>بإشتراك واحد.</h2>
         <button
           onClick={() => {
-            navigate("/");
-            if (
-              showHeader === headerCases.HIDE_WITH_ANIMATION ||
-              showHeader === headerCases.HIDE_WITHOUT_ANIMATION
-            ) {
-              setShowHeader(headerCases.SHOW_WITH_ANIMATION);
+            if (location?.pathname === "/") {
+              if (
+                showHeader === headerCases.HIDE_WITH_ANIMATION ||
+                showHeader === headerCases.HIDE_WITHOUT_ANIMATION
+              ) {
+                setShowHeader(headerCases.SHOW_WITH_ANIMATION);
+              } else {
+                setShowHeader(headerCases.HIDE_WITH_ANIMATION);
+              }
             } else {
-              setShowHeader(headerCases.HIDE_WITH_ANIMATION);
+              if (
+                showHeader === headerCases.HIDE_WITHOUT_ANIMATION ||
+                showHeader === headerCases.HIDE_WITH_ANIMATION
+              ) {
+                navigate("/");
+              } else {
+                setShowHeader(headerCases.SHOW_WITH_ANIMATION);
+              }
             }
           }}
         >
