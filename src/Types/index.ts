@@ -21,6 +21,8 @@ type typeAppProviderValue = {
   socialIcons?: typeSocialIcons;
   internalLinks?: typeInternalLinks;
   listData?: typeGameListData;
+  termsData?: typeTermsData;
+  privacyData?: typePrivacyData;
 };
 
 type typeBackdropProps = {
@@ -46,9 +48,13 @@ type typeSingleGameData = {
 
 type typeGameListData = typeSingleGameData[];
 
+type typeTermsData = string[];
+
 type typeGamesGrid = {
   card: any;
 };
+
+type typePrivacyData = string[];
 
 // type alltypes = typeSingleSocialIconData &
 //   typeSocialIcons &
@@ -63,4 +69,6 @@ export type {
   typeSingleGameData,
   typeGameListData,
   typeGamesGrid,
+  typeTermsData,
+  typePrivacyData,
 };
