@@ -3,11 +3,14 @@ import type { typeSingleGameData } from "../../Types";
 
 import classes from "./GameThumbBox.module.scss";
 
-const GameThumbBox = ({ name, gameId, imgUrl }: typeSingleGameData) => {
+const GameThumbBox = ({ gameId }: typeSingleGameData) => {
   return (
     <div className={classes.GameThumbBox}>
       <Link to={`/games/${gameId}`}>
-        <img src={imgUrl} alt={name} />
+        <img
+          src={`https://www.ourfastcdn.com/elegantgames/mygames/${gameId}/HTML5-Game/icon-256.png`}
+          alt={gameId}
+        />
       </Link>
     </div>
   );
