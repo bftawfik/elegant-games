@@ -5,7 +5,11 @@ import {
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 
-import type { typeSocialIcons, typeInternalLinks } from "./Types";
+import type {
+  typeSocialIcons,
+  typeInternalLinks,
+  typeGameListData,
+} from "./Types";
 
 import Router from "./Router/Router";
 
@@ -59,6 +63,81 @@ const internalLinks: typeInternalLinks = [
   },
 ];
 
+const listData: typeGameListData = [
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+  {
+    name: "hello",
+    gameId: "5",
+    imgUrl:
+      "https://www.ourfastcdn.com/elegantgames/mygames/21.Cars/HTML5-Game/icon-256.png",
+  },
+];
+
 function App() {
   // const [stateUserTheme, setStateUserTheme] = useState("lightr");
 
@@ -69,7 +148,7 @@ function App() {
 
   return (
     <div className="App">
-      <StaticDataProvider value={{ socialIcons, internalLinks }}>
+      <StaticDataProvider value={{ socialIcons, internalLinks, listData }}>
         <Router />
       </StaticDataProvider>
     </div>
