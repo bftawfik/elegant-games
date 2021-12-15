@@ -7,12 +7,12 @@ import type { typeGamesGrid, typeAppProviderValue } from "../../Types";
 import classes from "./GamesGrid.module.scss";
 
 const GamesGrid = ({ card: Card }: typeGamesGrid) => {
-  const { listData }: typeAppProviderValue = useContext(AppDataContext);
+  const { gamesData }: typeAppProviderValue = useContext(AppDataContext);
   return (
     <div className={classes.GamesGrid}>
-      {listData &&
-        listData.map((gameThumbBoxData, ndx) => (
-          <Card key={ndx} {...gameThumbBoxData} />
+      {gamesData &&
+        gamesData.map((gameId, ndx) => (
+          <Card key={ndx} gameId={gameId} />
         ))}
     </div>
   );
