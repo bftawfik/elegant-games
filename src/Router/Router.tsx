@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
@@ -14,7 +15,7 @@ import Missing from "../Pages/Missing/Missing";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <Fragment>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -27,7 +28,7 @@ const Router = () => {
         <Route path="*" element={<Missing />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </Fragment>
   );
 };
 export default Router;
