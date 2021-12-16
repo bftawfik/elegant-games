@@ -9,10 +9,10 @@ const getQueryParams =
 const extractParams = (
   queryParams: URLSearchParams,
   ...params: string[]
-): undefined | string | string[] => {
+): string | string[] => {
   const getQueryParamsAsString = getQueryParams(queryParams);
   return params?.length === 0
-    ? undefined
+    ? ""
     : params.length === 1
     ? getQueryParamsAsString(params[0])
     : params.map((singleParam) => getQueryParamsAsString(singleParam));
