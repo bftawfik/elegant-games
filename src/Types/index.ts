@@ -30,7 +30,7 @@ type typeBackdropProps = {
   zndx?: number;
   bgOpacity?: number;
   backgroundColorHex?: string;
-  showBackdrop: boolean | undefined;
+  showBackdrop: string;
   onClickHandler?: React.MouseEventHandler | undefined;
 };
 

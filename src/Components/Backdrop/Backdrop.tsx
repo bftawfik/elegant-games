@@ -10,14 +10,22 @@ const Backdrop = ({
   showBackdrop,
   onClickHandler,
 }: typeBackdropProps) => {
+  const headerCases = {
+    SHOW_WITHOUT_ANIMATION: "SHOW_WITHOUT_ANIMATION",
+    HIDE_WITHOUT_ANIMATION: "HIDE_WITHOUT_ANIMATION",
+    SHOW_WITH_ANIMATION: "SHOW_WITH_ANIMATION",
+    HIDE_WITH_ANIMATION: "HIDE_WITH_ANIMATION",
+  };
   return (
     <button
       className={[
         classes.Backdrop,
-        showBackdrop
+        showBackdrop === headerCases.SHOW_WITH_ANIMATION
           ? classes.fadeIn
-          : showBackdrop === false
+          : showBackdrop === headerCases.HIDE_WITH_ANIMATION
           ? classes.fadeOut
+          : showBackdrop === headerCases.HIDE_WITHOUT_ANIMATION
+          ? classes.hide
           : undefined,
       ].join(" ")}
       style={{

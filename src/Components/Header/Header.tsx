@@ -26,12 +26,7 @@ const Header = () => {
 
   return (
     <>
-      <Backdrop
-        showBackdrop={
-          showHeader === headerCases.SHOW_WITHOUT_ANIMATION ||
-          showHeader === headerCases.SHOW_WITH_ANIMATION
-        }
-      />
+      <Backdrop showBackdrop={showHeader} />
       <div
         className={[
           classes.Header,
