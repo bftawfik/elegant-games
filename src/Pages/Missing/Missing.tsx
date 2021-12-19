@@ -1,5 +1,25 @@
+import FulscrnWrpr from "../../Components/FulscrnWrpr/FulscrnWrpr";
+
+import classes from "./Missing.module.scss";
+import { Link } from "react-router-dom";
+
 const Missing = () => {
-  return <div>404</div>;
+  return (
+    <FulscrnWrpr
+      className={classes.Privacy}
+      containerClassName={classes.container}
+    >
+      <div className={classes.contents}>
+        <h2>
+          <span>الصفحة غير موجودة</span>
+          <span>(404)</span>
+          <span>
+            <Link to="/">الصفحة الرئيسية</Link>
+          </span>
+        </h2>
+      </div>
+    </FulscrnWrpr>
+  );
 };
 
 export default Missing;
