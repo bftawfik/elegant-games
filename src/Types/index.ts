@@ -24,6 +24,7 @@ type typeAppProviderValue = {
   termsData?: typeTermsData;
   privacyData?: typePrivacyData;
   gamesData?: typeGamesData;
+  user?: user;
 };
 
 type typeBackdropProps = {
@@ -57,6 +58,17 @@ type typeGamesGrid = {
 
 type typePrivacyData = string[];
 
+type user =
+  | Promise<{
+      errorMessage: string;
+      lang: number;
+      messageDeliveryStatus: boolean;
+      msisdn: string;
+      subscriptionContractId: number;
+      token: string;
+    }>
+  | undefined;
+
 // type alltypes = typeSingleSocialIconData &
 //   typeSocialIcons &
 //   typeAppProviderValue;
@@ -73,4 +85,5 @@ export type {
   typeTermsData,
   typePrivacyData,
   typeGamesData,
+  user,
 };

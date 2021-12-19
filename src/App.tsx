@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import Router from "./Router/Router";
@@ -18,35 +19,35 @@ import {
 import "./App.scss";
 
 function App() {
-  // const [stateUserTheme, setStateUserTheme] = useState("lightr");
-
-  // useEffect(() => {
-  //   document.documentElement.className = "";
-  //   document.documentElement.classList.add(`theme-${stateUserTheme}`);
-  // }, [stateUserTheme]);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const [token] = extractParams(searchParams, ["token"]);
+  const [user, setUser] = useState(undefined);
+  const [isSubscribed, setIsSubscribed] = useState<Boolean | undefined>(
+    undefined
+  );
 
   const checkToken = async (token: string) => {
     const res = await postIsSubscribed(token);
     const { statusCode, data } = await res.json();
-    const { decryptedObj, isSubscribed } = data;
-    if (statusCode === 200 && isSubscribed) {
-      const user = {
-        msisdn: decryptedObj.msisdn,
-        subscriptionContractId: decryptedObj.subscriptionContractId,
-        lang: decryptedObj.lang,
-        token: decryptedObj.token,
-      };
-      return user;
+    if (statusCode === 200) {
+      const { decryptedObj, isSubscribed } = data;
+      if (isSubscribed) {
+        setIsSubscribed(true);
+        setUser({
+          ...decryptedObj,
+        });
+      } else {
+        setIsSubscribed(false);
+      }
     }
-    return undefined;
   };
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const token = extractParams(searchParams, "token");
-  console.log(token);
-  if (!Array.isArray(token)) {
-    checkToken(token);
-  }
+
+  useEffect(() => {
+    if (isSubscribed === undefined) {
+      checkToken(token);
+    }
+  }, [isSubscribed, token]);
 
   return (
     <div className="App">
@@ -57,6 +58,7 @@ function App() {
           termsData,
           privacyData,
           gamesData,
+          user,
         }}
       >
         <Router />
