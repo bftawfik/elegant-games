@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
+
 import FulscrnWrpr from "../../Components/FulscrnWrpr/FulscrnWrpr";
 
 import classes from "./Missing.module.scss";
-import { Link } from "react-router-dom";
 
 const Missing = () => {
   return (
     <FulscrnWrpr
-      className={classes.Privacy}
+      className={classes.Missing}
       containerClassName={classes.container}
     >
       <div className={classes.contents}>
