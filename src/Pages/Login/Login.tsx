@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 import FulscrnWrpr from "../../Components/FulscrnWrpr/FulscrnWrpr";
 import RegisterCard from "../../Components/RegisterCard/RegisterCard";
 
@@ -11,25 +9,22 @@ const Login = () => {
       className={classes.Login}
       containerClassName={classes.container}
     >
-      <div className={classes.contents}>
-        <h2>تسجيل الدخول</h2>
-        <RegisterCard
-          title={"registerCardTitle.1"}
-          telPrefix={"telPrefix"}
-          telPattern={"telPattern"}
-          telMaxLength={7}
-          telPlaceHolder={"telPlaceHolder.1"}
-          submitLabel={"registerButtonLabel.1"}
-          providers={[]}
-          provider={undefined}
-          onSelectChange={undefined}
-          terms={null}
-          tel={"tel"}
-          // onChange={setTel}
-          // onSubmit={verifyTel}
-          // enriched={enriched}
-        />
-      </div>
+      <RegisterCard
+        title={"تسجيل الدخول"}
+        telPrefix={"02"}
+        telPattern={"telPattern"}
+        telMaxLength={7}
+        telPlaceHolder={"telPlaceHolder.1"}
+        submitLabel={"sub"}
+        providers={[]}
+        provider={undefined}
+        onSelectChange={undefined}
+        terms={null}
+        tel={"0127778885"}
+        // onChange={setTel}
+        // onSubmit={verifyTel}
+        // enriched={enriched}
+      />
     </FulscrnWrpr>
   );
 };
