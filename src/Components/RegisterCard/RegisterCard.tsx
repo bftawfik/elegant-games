@@ -5,6 +5,7 @@ import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./RegisterCard.module.scss";
 import CustomList from "../CustomList/CustomList";
+import { countries } from "./countries";
 
 type typeRegisterCardProps = {
   title?: any;
@@ -56,10 +57,11 @@ const RegisterCard = ({
               className={[classes.formRow, classes.telAndProvider].join(" ")}
             >
               <CustomList
-                classes={classes}
+                // classes={classes}
                 selectedProvider={provider}
                 providers={providers}
                 onOptionClick={onSelectChange}
+                data={countries}
               />
               <div className={classes.tel}>
                 <div className={classes.telPrefex}>{`(+${telPrefix})`}</div>
