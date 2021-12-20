@@ -1,20 +1,55 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faMobileAlt } from "@fortawesome/free-solid-svg-icons";
+import Select, { components } from "react-select";
+import { typeCountries } from "../../Types";
+import ReactCountryFlag from "react-country-flag";
 
 type typeCustomListProps = {
-  classes: any;
-  selectedProvider: any;
-  providers: any;
-  onOptionClick: any;
+  classes?: any;
+  selectedProvider?: any;
+  providers?: any;
+  onOptionClick?: any;
+  data?: typeCountries;
+};
+
+const options = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
+
+const customStyles = {
+  option: (provided: any, state: any) => ({
+    ...provided,
+    borderBottom: "1px dotted pink",
+    color: state.isSelected ? "red" : "blue",
+    padding: 20,
+  }),
+  control: () => ({
+    // none of react-select's styles are passed to <Control />
+    width: 200,
+  }),
+  singleValue: (provided: any, state: any) => {
+    const opacity = state.isDisabled ? 0.5 : 1;
+    const transition = "opacity 300ms";
+
+    return { ...provided, opacity, transition };
+  },
+};
+
+const CustomOption = ({ children, value, ...rest }: any) => { 
+  return (
+    <components.Option value={value} {...rest}>
+      <ReactCountryFlag countryCode={value.code} svg />
+    </components.Option>
+  );
 };
 
 const CustomList = ({
-  classes,
+  classes = {},
   selectedProvider,
   providers,
   onOptionClick,
+  data,
 }: typeCustomListProps) => {
   const [open, setOpen] = useState(false);
 
@@ -47,50 +82,16 @@ const CustomList = ({
 
   return (
     <div className={[classes.CustomList, open ? classes.open : null].join(" ")}>
-      <header>
-        <button
-          onClick={onListHeaderClick}
-          type="button"
-          title={selectedProvider?.name}
-        >
-          <span className={classes.icon}>
-            <FontAwesomeIcon icon={faChevronDown} />
-          </span>
-          {selectedProvider ? (
-            <img
-              src={`https://www.ourfastcdn.com/elegantgames/assets/operators/${selectedProvider.operatorCode}.png`}
-              alt={selectedProvider.name}
-              className={classes.providerIcon}
-            />
-          ) : (
-            <span className={classes.providerIcon}>
-              <FontAwesomeIcon icon={faMobileAlt} />
-            </span>
-          )}
-        </button>
-      </header>
-      <main>
-        <ul>
-          {providers.map((p: any, ndx: number) => (
-            <li
-              key={ndx}
-              value={p.catalogId}
-              className={classes[`logo${p.catalogId}`]}
-            >
-              <button
-                onClick={() => onOptionClickHandler(p.catalogId)}
-                type="button"
-                title={p?.name}
-              >
-                <img
-                  src={`https://www.ourfastcdn.com/elegantgames/assets/operators/${p?.operatorCode}.png`}
-                  alt={p?.name}
-                />
-              </button>
-            </li>
-          ))}
-        </ul>
-      </main>
+      {data && (
+        <Select
+          styles={customStyles}
+          options={data.map((c) => ({
+            value: c,
+            label: c.name,
+          }))}
+          components={{ Option: CustomOption }}
+        />
+      )}
     </div>
   );
 };
