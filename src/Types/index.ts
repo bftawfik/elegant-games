@@ -73,6 +73,14 @@ type user =
 //   typeSocialIcons &
 //   typeAppProviderValue;
 
+type typeCountry = {
+  name: string;
+  dial_code: string;
+  code: string;
+};
+
+type typeCountries = typeCountry[];
+
 export type {
   typeSocialIcons,
   typeInternalLinks,
@@ -86,4 +94,5 @@ export type {
   typePrivacyData,
   typeGamesData,
   user,
+  typeCountries,
 };
