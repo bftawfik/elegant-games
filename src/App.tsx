@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 import Router from "./Router/Router";
@@ -18,39 +18,55 @@ import {
   usedCountriesCodes,
   registerCardData,
 } from "./Mocks";
-
+import { typeUserData } from "./Types";
 import "./App.scss";
 
 function App() {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const [token] = extractParams(searchParams, ["token"]);
-  const [user, setUser] = useState(undefined);
-  const [isSubscribed, setIsSubscribed] = useState<Boolean | undefined>(
-    undefined
-  );
+  const [userData, setUserData] = useState<typeUserData>({
+    isSubscribed: undefined,
+    data: undefined,
+  });
+  const { isSubscribed }: typeUserData = userData;
+  const [externalUrl, setExternalUrl] = useState<string | undefined>(undefined);
 
-  const checkToken = async (token: string) => {
-    const res = await postIsSubscribed(token);
-    const { statusCode, data } = await res.json();
-    if (statusCode === 200) {
-      const { decryptedObj, isSubscribed } = data;
-      if (isSubscribed) {
-        setIsSubscribed(true);
-        setUser({
-          ...decryptedObj,
-        });
-      } else {
-        setIsSubscribed(false);
-      }
+  const checkSessionStorage = () => {
+    const sessionUserData = sessionStorage.getItem("userData");
+    if (sessionUserData) {
+      setUserData(JSON.parse(sessionUserData));
     }
   };
+
+  const checkToken = useCallback(
+    async (token: string) => {
+      const res = await postIsSubscribed(token);
+      const { statusCode, data } = await res.json();
+      console.log(isSubscribed);
+
+      if (statusCode === 200) {
+        const { decryptedObj, isSubscribed } = data;
+        setUserData({
+          isSubscribed: isSubscribed,
+          data: { ...decryptedObj, urlToken: token },
+        });
+        if (!isSubscribed) {
+          checkSessionStorage();
+        }
+      } else {
+        checkSessionStorage();
+      }
+    },
+    [isSubscribed]
+  );
 
   useEffect(() => {
     if (isSubscribed === undefined) {
       checkToken(token);
+      setExternalUrl("http://www.google.com");
     }
-  }, [isSubscribed, token]);
+  }, [isSubscribed, token, checkToken]);
 
   return (
     <div className="App">
@@ -61,10 +77,11 @@ function App() {
           termsData,
           privacyData,
           gamesData,
-          user,
+          userData,
           allCountriesData,
           usedCountriesCodes,
           registerCardData,
+          externalUrl,
         }}
       >
         <Router />

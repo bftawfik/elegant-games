@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useParams, useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Redirect from "../../Components/Redirect/Redirect";
 
@@ -11,13 +11,13 @@ import classes from "./SingleGame.module.scss";
 
 const SingleGame = () => {
   let { gameId } = useParams();
-  const { user }: typeAppProviderValue = useContext(AppDataContext);
+  const { userData, externalUrl }: typeAppProviderValue =
+    useContext(AppDataContext);
   const navigate = useNavigate();
-  if (!user) {
+  if (!userData?.isSubscribed) {
     navigate("/");
   }
-
-  return user ? (
+  return userData?.isSubscribed ? (
     <div className={classes.SingleGame}>
       <iframe
         src={`https://www.ourfastcdn.com/elegantgames/mygames/${gameId}/HTML5-Game/index.html`}
@@ -25,7 +25,7 @@ const SingleGame = () => {
       />
     </div>
   ) : (
-    <Redirect externalUrl="http://www.google.com" />
+    <Redirect externalUrl={externalUrl} />
   );
 };
 

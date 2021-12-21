@@ -24,10 +24,11 @@ type typeAppProviderValue = {
   termsData?: typeTermsData;
   privacyData?: typePrivacyData;
   gamesData?: typeGamesData;
-  user?: user;
+  userData?: typeUserData;
   allCountriesData?: typeAllCountriesData;
   usedCountriesCodes?: typeUsedCountriesCodes;
   registerCardData?: typeRegisterCardData;
+  externalUrl?: undefined | string;
 };
 
 type typeBackdropProps = {
@@ -61,16 +62,20 @@ type typeGamesGrid = {
 
 type typePrivacyData = string[];
 
-type user =
-  | Promise<{
-      errorMessage: string;
-      lang: number;
-      messageDeliveryStatus: boolean;
-      msisdn: string;
-      subscriptionContractId: number;
-      token: string;
-    }>
-  | undefined;
+type typeUserData = {
+  isSubscribed: undefined | boolean;
+  data:
+    | Promise<{
+        errorMessage: string;
+        lang: number;
+        messageDeliveryStatus: boolean;
+        msisdn: string;
+        subscriptionContractId: number;
+        token: string;
+        urlToken: string;
+      }>
+    | undefined;
+};
 
 // type alltypes = typeSingleSocialIconData &
 //   typeSocialIcons &
@@ -122,7 +127,7 @@ export type {
   typeTermsData,
   typePrivacyData,
   typeGamesData,
-  user,
+  typeUserData,
   typeCountryData,
   typeAllCountriesData,
   typeUsedCountriesCodes,
