@@ -1,6 +1,6 @@
-import type { typeCountries } from "../../Types";
+import type { typeAllCountriesData } from "../../Types";
 
-const countries: typeCountries = [
+const allCountriesData: typeAllCountriesData = [
   {
     name: "Afghanistan",
     dial_code: "+93",
@@ -1213,4 +1213,4 @@ const countries: typeCountries = [
   },
 ];
 
-export { countries };
+export default allCountriesData;
