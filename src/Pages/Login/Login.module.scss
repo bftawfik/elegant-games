@@ -15,7 +15,7 @@
     flex-grow: 1;
     .contents {
       margin-top: emsToPx(5);
-      background: #027cbf80 linear-gradient(45deg, black, transparent);
+      background: #027cbf80 linear-gradient(45deg, #{$clr-black}, transparent);
       border-radius: 10px;
       max-width: emsToPx(55);
       padding: 50px 30px;
