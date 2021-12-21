@@ -36,35 +36,35 @@ function App() {
     const sessionUserData = sessionStorage.getItem("userData");
     if (sessionUserData) {
       setUserData(JSON.parse(sessionUserData));
+    } else {
+      setUserData({
+        isSubscribed: false,
+        data: undefined,
+      });
     }
   };
 
-  const checkToken = useCallback(
-    async (token: string) => {
-      const res = await postIsSubscribed(token);
-      const { statusCode, data } = await res.json();
-      console.log(isSubscribed);
-
-      if (statusCode === 200) {
-        const { decryptedObj, isSubscribed } = data;
-        setUserData({
-          isSubscribed: isSubscribed,
-          data: { ...decryptedObj, urlToken: token },
-        });
-        if (!isSubscribed) {
-          checkSessionStorage();
-        }
-      } else {
+  const checkToken = useCallback(async (token: string) => {
+    const res = await postIsSubscribed(token);
+    const { statusCode, data } = await res.json();
+    if (statusCode === 200) {
+      const { decryptedObj, isSubscribed } = data;
+      setUserData({
+        isSubscribed: isSubscribed,
+        data: { ...decryptedObj, urlToken: token },
+      });
+      if (!isSubscribed) {
+        setExternalUrl("http://www.google.com");
         checkSessionStorage();
       }
-    },
-    [isSubscribed]
-  );
+    } else {
+      checkSessionStorage();
+    }
+  }, []);
 
   useEffect(() => {
     if (isSubscribed === undefined) {
       checkToken(token);
-      setExternalUrl("http://www.google.com");
     }
   }, [isSubscribed, token, checkToken]);
 
