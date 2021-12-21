@@ -1,31 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import Select, { components } from "react-select";
-import { typeAllCountriesData } from "../../Types";
+import { typeCustomListProps, typeCustomOptionProps } from "../../Types";
 import ReactCountryFlag from "react-country-flag";
 
 import classes from "./CountriesList.module.scss";
-
-type typeCustomListProps = {
-  data?: typeAllCountriesData;
-};
-
-// type typeCustomOptionProps = { children: any; value: any; rest: any };
-type typeCustomOptionProps = any;
 
 const customStyles = {
   container: (provided: any, state: any) => ({
     ...provided,
     width: "100%",
   }),
-  // control: () => ({
-  //   // none of react-select's styles are passed to <Control />
-  //   width: 200,
-  // }),
-  // singleValue: (provided: any, state: any) => {
-  //   const opacity = state.isDisabled ? 0.5 : 1;
-  //   const transition = "opacity 300ms";
-  //   return { ...provided, opacity, transition };
-  // },
 };
 
 const CustomOption = ({ children, value, ...rest }: typeCustomOptionProps) => {
@@ -37,11 +21,16 @@ const CustomOption = ({ children, value, ...rest }: typeCustomOptionProps) => {
         className={classes.flag}
         title={value.name}
       />
+      <span>{value.name}</span>
     </components.Option>
   );
 };
 
-const CountriesList = ({ data }: typeCustomListProps) => {
+const CountriesList = ({
+  data,
+  changeCountryHandler,
+  placeholder,
+}: typeCustomListProps) => {
   const [open, setOpen] = useState(false);
 
   const openRef = useRef(open);
@@ -69,9 +58,8 @@ const CountriesList = ({ data }: typeCustomListProps) => {
             label: singleCountry.name,
           }))}
           components={{ Option: CustomOption }}
-          onChange={(e) => {
-            console.log(e);
-          }}
+          onChange={changeCountryHandler}
+          placeholder={placeholder}
         />
       )}
     </div>
