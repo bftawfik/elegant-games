@@ -4,51 +4,51 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./RegisterCard.module.scss";
-import CustomList from "../CountriesList/CountriesList";
+import CountriesList from "../CountriesList/CountriesList";
 import { AppDataContext } from "../AppDataProvider/AppDataProvider";
 
-import type { typeAppProviderValue, typeAllCountriesData } from "../../Types";
-
-type typeRegisterCardProps = {
-  title?: any;
-  telPrefix?: any;
-  telPattern?: any;
-  telMaxLength?: any;
-  telPlaceHolder?: any;
-  providers?: any;
-  provider?: any;
-  onSelectChange?: any;
-  submitLabel?: any;
-  terms?: any;
-  tel?: any;
-  onChange?: any;
-  onSubmit?: any;
-  enriched?: any;
-  biggerTitle?: any;
-};
+import type {
+  typeAppProviderValue,
+  typeAllCountriesData,
+  typeRegisterCardProps,
+} from "../../Types";
 
 const RegisterCard = ({
-  title,
-  telPrefix,
-  telPattern,
-  telMaxLength,
-  telPlaceHolder,
-  providers,
-  provider,
-  onSelectChange,
-  submitLabel,
-  terms,
   tel,
-  onChange,
+  changeCountryHandler,
+  selectedCountry,
   onSubmit,
-  enriched,
-  biggerTitle,
+  onChange,
 }: typeRegisterCardProps) => {
-  const { allCountriesData, usedCountriesCodes }: typeAppProviderValue =
-    useContext(AppDataContext);
+  const {
+    registerCardData,
+    allCountriesData,
+    usedCountriesCodes,
+  }: typeAppProviderValue = useContext(AppDataContext);
   const [usedCountriesData, setUsedCountriesData] = useState<
     typeAllCountriesData | undefined
   >([]);
+
+  const findNotSpeciale = (key: string) => {
+    switch (key) {
+      case "Backspace":
+      case "Delete":
+      case "ArrowUp":
+      case "ArrowDown":
+      case "ArrowLeft":
+      case "ArrowRight":
+        return false;
+      default:
+        return true;
+    }
+  };
+
+  const onKeyDownHandler = (e: any) => {
+    const pattern = new RegExp("[0-9]");
+    if (findNotSpeciale(e.key) && !pattern.test(e.key)) {
+      e.preventDefault();
+    }
+  };
 
   useEffect(() => {
     const tempUsedCountriesData: typeAllCountriesData | undefined =
@@ -60,79 +60,52 @@ const RegisterCard = ({
 
   return (
     <div className={classes.RegisterCard}>
-      {!enriched && (
-        <header>
-          {biggerTitle && <h1>{biggerTitle}</h1>}
-          <h2>{title}</h2>
-        </header>
-      )}
+      <header>
+        <h2>{registerCardData?.title || ""}</h2>
+      </header>
       <main>
-        <form onSubmit={!enriched ? onSubmit : undefined}>
-          {!enriched && (
-            <div
-              className={[classes.formRow, classes.telAndProvider].join(" ")}
-            >
-              <CustomList
-                data={usedCountriesData}
-              />
-              <div className={classes.tel}>
-                <div className={classes.telPrefex}>{`(+${telPrefix})`}</div>
-                <input
-                  type="tel"
-                  maxLength={telMaxLength}
-                  id="msisdn"
-                  name="msisdn"
-                  placeholder={telPlaceHolder}
-                  value={tel}
-                  onChange={(e) => onChange(e.target.value)}
-                  required
-                  pattern={telPattern}
-                  size={1}
-                />
+        <form onSubmit={onSubmit}>
+          <div className={[classes.formRow, classes.telAndProvider].join(" ")}>
+            <CountriesList
+              data={usedCountriesData}
+              changeCountryHandler={changeCountryHandler}
+              placeholder={registerCardData?.countriesListPlaceHolder || ""}
+            />
+            <div className={classes.tel}>
+              <div className={classes.telPrefex}>
+                {selectedCountry?.dial_code
+                  ? `(${selectedCountry?.dial_code})`
+                  : ""}
               </div>
+              <input
+                type="tel"
+                id="msisdn"
+                name="msisdn"
+                placeholder={registerCardData?.telPlaceHolder || ""}
+                value={tel}
+                onChange={(e) =>
+                  onChange ? onChange(e.target.value) : undefined
+                }
+                required
+                size={1}
+                disabled={!selectedCountry}
+                onKeyDown={onKeyDownHandler}
+              />
             </div>
-          )}
+          </div>
           <div className={classes.formRow}>
             <button
-              type={enriched ? "button" : "submit"}
-              className={[
-                classes.subscribe,
-                tel.length === telMaxLength || enriched ? classes.active : null,
-              ].join(" ")}
-              onClick={enriched ? onSubmit : undefined}
-              title={submitLabel}
+              type="submit"
+              className={[classes.subscribe].join(" ")}
+              title={registerCardData?.submitLabel || ""}
             >
               <span>
                 <FontAwesomeIcon icon={faTrophy} />
               </span>
-              {submitLabel}
+              {registerCardData?.submitLabel || ""}
             </button>
           </div>
         </form>
-        <div className={classes.messageBox}>
-          {terms &&
-            terms.map((singleTerm: any, ndx: number) => {
-              switch (singleTerm.elementType) {
-                case "p":
-                  return <p key={ndx}>{singleTerm.data}</p>;
-                case "listWithHeader":
-                  return (
-                    <div key={ndx}>
-                      <p>{singleTerm.data.header}</p>
-                      <ul>
-                        {singleTerm.data.list.map(
-                          (singlItem: any, ndx: number) => (
-                            <li key={ndx}>{singlItem}</li>
-                          )
-                        )}
-                      </ul>
-                    </div>
-                  );
-                default:
-                  return null;
-              }
-            })}
-        </div>
       </main>
     </div>
   );
