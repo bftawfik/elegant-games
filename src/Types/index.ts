@@ -27,6 +27,7 @@ type typeAppProviderValue = {
   user?: user;
   allCountriesData?: typeAllCountriesData;
   usedCountriesCodes?: typeUsedCountriesCodes;
+  registerCardData?: typeRegisterCardData;
 };
 
 type typeBackdropProps = {
@@ -85,6 +86,13 @@ type typeAllCountriesData = typeCountryData[];
 
 type typeUsedCountriesCodes = string[];
 
+type typeRegisterCardData = {
+  title: string;
+  telPlaceHolder: string;
+  submitLabel: string;
+  countriesListPlaceHolder:string;
+};
+
 export type {
   typeSocialIcons,
   typeInternalLinks,
@@ -101,4 +109,5 @@ export type {
   typeCountryData,
   typeAllCountriesData,
   typeUsedCountriesCodes,
+  typeRegisterCardData,
 };
