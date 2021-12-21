@@ -14,6 +14,8 @@ import {
   gamesData,
   termsData,
   privacyData,
+  allCountriesData,
+  usedCountriesCodes,
 } from "./Mocks";
 
 import "./App.scss";
@@ -59,6 +61,8 @@ function App() {
           privacyData,
           gamesData,
           user,
+          allCountriesData,
+          usedCountriesCodes,
         }}
       >
         <Router />
