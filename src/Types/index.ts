@@ -90,8 +90,25 @@ type typeRegisterCardData = {
   title: string;
   telPlaceHolder: string;
   submitLabel: string;
-  countriesListPlaceHolder:string;
+  countriesListPlaceHolder: string;
 };
+
+type typeRegisterCardProps = {
+  tel?: string;
+  onChange?: (newTel: string) => void;
+  onSubmit?: (e: any) => {};
+  biggerTitle?: (e: any) => {};
+  changeCountryHandler: (o: any) => void;
+  selectedCountry?: typeCountryData;
+};
+
+type typeCustomListProps = {
+  data?: typeAllCountriesData;
+  changeCountryHandler?: (e: any) => void;
+  placeholder: string;
+};
+
+type typeCustomOptionProps = any;
 
 export type {
   typeSocialIcons,
@@ -110,4 +127,7 @@ export type {
   typeAllCountriesData,
   typeUsedCountriesCodes,
   typeRegisterCardData,
+  typeRegisterCardProps,
+  typeCustomListProps,
+  typeCustomOptionProps,
 };
