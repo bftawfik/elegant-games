@@ -1,0 +1,12 @@
+.CountriesList {
+  display: flex;
+  width: 120px;
+  .option {
+    background-color: chartreuse;
+    display: flex;
+    justify-content: center;
+    .flag {
+      font-size: 40px;
+    }
+  }
+}
