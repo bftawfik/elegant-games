@@ -25,6 +25,8 @@ type typeAppProviderValue = {
   privacyData?: typePrivacyData;
   gamesData?: typeGamesData;
   user?: user;
+  allCountriesData?: typeAllCountriesData;
+  usedCountriesCodes?: typeUsedCountriesCodes;
 };
 
 type typeBackdropProps = {
@@ -73,13 +75,15 @@ type user =
 //   typeSocialIcons &
 //   typeAppProviderValue;
 
-type typeCountry = {
+type typeCountryData = {
   name: string;
   dial_code: string;
   code: string;
 };
 
-type typeCountries = typeCountry[];
+type typeAllCountriesData = typeCountryData[];
+
+type typeUsedCountriesCodes = string[];
 
 export type {
   typeSocialIcons,
@@ -94,5 +98,7 @@ export type {
   typePrivacyData,
   typeGamesData,
   user,
-  typeCountries,
+  typeCountryData,
+  typeAllCountriesData,
+  typeUsedCountriesCodes,
 };
