@@ -7,6 +7,7 @@ import {
 
 import allCountriesData from "./allCountriesData/allCountriesData";
 import usedCountriesCodes from "./usedCountriesCodes/usedCountriesCodes";
+import registerCardData from "./registerCardData/registerCardData";
 
 import type {
   typeSocialIcons,
@@ -124,4 +125,5 @@ export {
   privacyData,
   allCountriesData,
   usedCountriesCodes,
+  registerCardData,
 };
