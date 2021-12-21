@@ -9,7 +9,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: $clr-002;
+  background-color: $clr-008;
   color: $clr-white;
   outline: 20px solid $clr-white;
   border-radius: 50%;
@@ -18,7 +18,7 @@
   justify-content: center;
   align-items: center;
   h1 {
-    color: $clr-001;
+    color: $clr-007;
     font-family: $font-pattay;
     font-size: emsToPx(4);
     font-weight: 300;
@@ -41,7 +41,7 @@
     height: 60px;
     margin: 15px;
     background-color: $clr-white;
-    color: $clr-002;
+    color: $clr-008;
     cursor: pointer;
     span {
       color: inherit;
@@ -112,7 +112,7 @@
       padding: 0 emsToPx(2.5);
       margin: 15px;
       background-color: $clr-white;
-      color: $clr-002;
+      color: $clr-008;
       animation-name: bgColorIn95;
       animation-timing-function: ease-out;
       animation-duration: 600ms;
@@ -183,6 +183,6 @@
     padding: 0 emsToPx(2.5);
     margin: 15px;
     background-color: $clr-white;
-    color: $clr-002;
+    color: $clr-008;
   }
 }
