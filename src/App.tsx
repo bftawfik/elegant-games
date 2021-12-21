@@ -16,6 +16,7 @@ import {
   privacyData,
   allCountriesData,
   usedCountriesCodes,
+  registerCardData,
 } from "./Mocks";
 
 import "./App.scss";
@@ -63,6 +64,7 @@ function App() {
           user,
           allCountriesData,
           usedCountriesCodes,
+          registerCardData,
         }}
       >
         <Router />
