@@ -1,11 +1,13 @@
-// import { useTranslation } from "react-i18next";
+import { useContext, useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrophy } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./RegisterCard.module.scss";
-import CustomList from "../CustomList/CustomList";
-import { countries } from "./countries";
+import CustomList from "../CountriesList/CountriesList";
+import { AppDataContext } from "../AppDataProvider/AppDataProvider";
+
+import type { typeAppProviderValue, typeAllCountriesData } from "../../Types";
 
 type typeRegisterCardProps = {
   title?: any;
@@ -42,6 +44,20 @@ const RegisterCard = ({
   enriched,
   biggerTitle,
 }: typeRegisterCardProps) => {
+  const { allCountriesData, usedCountriesCodes }: typeAppProviderValue =
+    useContext(AppDataContext);
+  const [usedCountriesData, setUsedCountriesData] = useState<
+    typeAllCountriesData | undefined
+  >([]);
+
+  useEffect(() => {
+    const tempUsedCountriesData: typeAllCountriesData | undefined =
+      allCountriesData?.filter(
+        ({ code }) => !!usedCountriesCodes?.find((cCode) => cCode === code)
+      );
+    setUsedCountriesData(tempUsedCountriesData);
+  }, [usedCountriesCodes, allCountriesData]);
+
   return (
     <div className={classes.RegisterCard}>
       {!enriched && (
@@ -57,11 +73,7 @@ const RegisterCard = ({
               className={[classes.formRow, classes.telAndProvider].join(" ")}
             >
               <CustomList
-                // classes={classes}
-                selectedProvider={provider}
-                providers={providers}
-                onOptionClick={onSelectChange}
-                data={countries}
+                data={usedCountriesData}
               />
               <div className={classes.tel}>
                 <div className={classes.telPrefex}>{`(+${telPrefix})`}</div>
