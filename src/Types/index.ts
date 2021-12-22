@@ -28,6 +28,7 @@ type typeAppProviderValue = {
   usedCountriesCodes?: typeUsedCountriesCodes;
   registerCardData?: typeRegisterCardData;
   externalUrl?: undefined | string;
+  language?: string;
 };
 
 type typeBackdropProps = {
@@ -114,6 +115,8 @@ type typeCustomListProps = {
 
 type typeCustomOptionProps = any;
 
+type typeDefaultsObj = { lang: string; productId: number };
+
 export type {
   typeSocialIcons,
   typeInternalLinks,
@@ -134,4 +137,5 @@ export type {
   typeRegisterCardProps,
   typeCustomListProps,
   typeCustomOptionProps,
+  typeDefaultsObj,
 };
