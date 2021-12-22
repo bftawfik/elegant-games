@@ -11,7 +11,6 @@ type typeSingleSocialIconData = {
 type typeSocialIcons = typeSingleSocialIconData[] | undefined;
 
 type typeSingleInternalLinkData = {
-  name: string;
   url: string;
 };
 
