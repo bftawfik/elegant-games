@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Router from "./Router/Router";
 
@@ -17,14 +18,18 @@ import {
   allCountriesData,
   usedCountriesCodes,
   registerCardData,
+  defaults,
 } from "./Mocks";
 import { typeUserData } from "./Types";
 import "./App.scss";
 
 function App() {
+  const { lang: defaultLang } = defaults;
+  const { i18n } = useTranslation();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const [token] = extractParams(searchParams, ["token"]);
+
+  const [language, token] = extractParams(searchParams, ["lang", "token"]);
   const [userData, setUserData] = useState<typeUserData>({
     isSubscribed: undefined,
     data: undefined,
@@ -68,6 +73,20 @@ function App() {
     }
   }, [isSubscribed, token, checkToken]);
 
+  useEffect(() => {
+    if (language && document?.querySelector("html")?.lang !== language) {
+      document?.querySelector("html")?.setAttribute("lang", language);
+    } else if (!language) {
+      document?.querySelector("html")?.setAttribute("lang", defaultLang);
+    }
+  }, [language, defaultLang]);
+
+  useEffect(() => {
+    if (i18n.resolvedLanguage !== language) {
+      i18n.changeLanguage(language);
+    }
+  }, [language, i18n]);
+
   return (
     <div className="App">
       <StaticDataProvider
@@ -82,6 +101,7 @@ function App() {
           usedCountriesCodes,
           registerCardData,
           externalUrl,
+          language: language || defaultLang,
         }}
       >
         <Router />
