@@ -2,15 +2,22 @@ import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
 import { AppDataContext } from "../AppDataProvider/AppDataProvider";
 
 import FulscrnWrpr from "../FulscrnWrpr/FulscrnWrpr";
 
-import classes from "./Footer.module.scss";
+import { defaults } from "../../Mocks";
+
 import type { typeAppProviderValue } from "../../Types";
 
+import classes from "./Footer.module.scss";
+
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+  const en = i18n.getFixedT("en");
+  const { productId } = defaults;
   const { socialIcons, internalLinks }: typeAppProviderValue =
     useContext(AppDataContext);
   const [showFooter, setShowFooter] = useState<boolean | undefined>(undefined);
@@ -43,23 +50,24 @@ const Footer = () => {
       </button>
       <div className={classes.footerRow}>
         <div className={classes.footerCol}>
-          <h3>أهلا بك في ElegantGames</h3>
-          <p>
-            أكثر من 40 لعبة في انتظارك اشترك وابدأ اللعب الآن ... ألعاب جديدة
-            وتحديات جديدة كل يوم.
-          </p>
+          <h3>{`${t("footerData.header1.1")} ${en(
+            `products.${productId}`
+          )}`}</h3>
+          <p>{t("footerData.paragraph1.1")}</p>
           <ul className={classes.internalLinks}>
             {internalLinks &&
-              internalLinks.map(({ name, url }, ndx) => (
+              internalLinks.map(({ url }, ndx) => (
                 <li key={ndx}>
-                  <Link to={url}>{name}</Link>
+                  <Link to={url}>
+                    {t(`footerData.internalLinks.link${ndx}.1`)}
+                  </Link>
                   {ndx + 1 < internalLinks.length && <span>-</span>}
                 </li>
               ))}
           </ul>
         </div>
         <div className={classes.footerCol}>
-          <h3>تابعنا</h3>
+          <h3>{t("footerData.header2.1")}</h3>
           <ul>
             {socialIcons &&
               socialIcons.map(({ name, url, type, icon }, ndx) => (
@@ -79,7 +87,9 @@ const Footer = () => {
         </div>
       </div>
       <div className={classes.footerRow}>
-        <p>ElegantGames © جميع الحقوق محفوظة 2021</p>
+        <p>{`${en(`products.${productId}`)} © ${t(
+          "footerData.copyright.1"
+        )} 2021`}</p>
       </div>
     </FulscrnWrpr>
   );
