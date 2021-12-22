@@ -1,0 +1,38 @@
+{
+  "products": {
+    "1": "Kinda Games",
+    "2": "Security Player",
+    "3": "Elegant Games"
+  },
+  "headerData": {
+    "header1": {
+      "1": "header1 1 en"
+    },
+    "header2": {
+      "1": "header2 1 en"
+    },
+    "startBtn": {
+      "1": "start 1 en"
+    }
+  },
+  "footerData": {
+    "header1": {
+      "1": "header1 1 en"
+    },
+    "header2": {
+      "1": "header2 1 en"
+    },
+    "paragraph1": {
+      "1": "paragraph1 1 en"
+    },
+    "copyright": {
+      "1": "copyright 1 en"
+    },
+    "internalLinks": {
+      "link0": { "1": "link0 1 en" },
+      "link1": { "1": "link1 1 en" },
+      "link2": { "1": "link2 1 en" },
+      "link3": { "1": "link3 1 en" }
+    }
+  }
+}
