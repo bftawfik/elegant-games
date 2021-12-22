@@ -25,7 +25,9 @@ import "./App.scss";
 
 function App() {
   const { lang: defaultLang } = defaults;
-  const { i18n } = useTranslation();
+  const {
+    i18n: { resolvedLanguage, changeLanguage },
+  } = useTranslation();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
@@ -82,10 +84,10 @@ function App() {
   }, [language, defaultLang]);
 
   useEffect(() => {
-    if (i18n.resolvedLanguage !== language) {
-      i18n.changeLanguage(language);
+    if (resolvedLanguage !== language) {
+      changeLanguage(language);
     }
-  }, [language, i18n]);
+  }, [language, resolvedLanguage]);
 
   return (
     <div className="App">
