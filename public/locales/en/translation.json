@@ -56,5 +56,15 @@
         "1": "list1 item4 1"
       }
     }
+  },
+  "privacyData": {
+    "header1": {
+      "1": "header1 1 en"
+    },
+    "list1": {
+      "item0": {
+        "1": "list1 item0 1"
+      }
+    }
   }
 }

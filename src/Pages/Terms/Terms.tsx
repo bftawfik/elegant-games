@@ -26,7 +26,7 @@ const Terms = () => {
         <ul>
           {termsData &&
             termsData.map((termId, ndx) => (
-              <li key={ndx}>{t(`termsData.list1.item${ndx}.${termId}`)} </li>
+              <li key={ndx}>{t(`termsData.list1.item${ndx}.${termId}`)}</li>
             ))}
         </ul>
       </div>
