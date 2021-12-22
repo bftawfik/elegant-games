@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import Router from "./Router/Router";
@@ -28,16 +28,18 @@ function App() {
   const {
     i18n: { resolvedLanguage, changeLanguage },
   } = useTranslation();
+  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
-  const [language, token] = extractParams(searchParams, ["lang", "token"]);
+  const [paramLang, token] = extractParams(searchParams, ["lang", "token"]);
   const [userData, setUserData] = useState<typeUserData>({
     isSubscribed: undefined,
     data: undefined,
   });
   const { isSubscribed }: typeUserData = userData;
   const [externalUrl, setExternalUrl] = useState<string | undefined>(undefined);
+  const [language, setLanguage] = useState(paramLang || defaultLang);
 
   const checkSessionStorage = () => {
     const sessionUserData = sessionStorage.getItem("userData");
@@ -76,18 +78,25 @@ function App() {
   }, [isSubscribed, token, checkToken]);
 
   useEffect(() => {
-    if (language && document?.querySelector("html")?.lang !== language) {
-      document?.querySelector("html")?.setAttribute("lang", language);
-    } else if (!language) {
+    if (paramLang) {
+      if (document?.querySelector("html")?.lang !== paramLang) {
+        document?.querySelector("html")?.setAttribute("lang", paramLang);
+      }
+    } else {
       document?.querySelector("html")?.setAttribute("lang", defaultLang);
+      changeLanguage(defaultLang);
     }
-  }, [language, defaultLang]);
+  }, [paramLang, defaultLang]);
 
   useEffect(() => {
-    if (resolvedLanguage !== language) {
-      changeLanguage(language);
-    }
-  }, [language, resolvedLanguage]);
+    //   if (resolvedLanguage !== language) {
+    //     changeLanguage(language);
+    //     searchParams.set("lang", language);
+    //     const newPath = location.pathname.concat("?", searchParams.toString());
+    //     console.log(newPath);
+    //     navigate(newPath, { replace: true });
+    //   }
+  }, []);
 
   return (
     <div className="App">
