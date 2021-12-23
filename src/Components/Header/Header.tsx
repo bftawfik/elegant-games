@@ -54,13 +54,12 @@ const Header = () => {
         <h2>{t("headerData.header1.1")}</h2>
         <h2>{t("headerData.header2.1")}</h2>
         <div className={classes.buttonsContainer}>
-          {/* <span className={classes.icon}>
-            <FontAwesomeIcon icon={faHome} />
-          </span> */}
           {languagesData.map((lang, ndx) => (
             <button
               key={ndx}
-              className={lang === language ? classes.selected : undefined}
+              className={
+                lang === language ? classes.selected : classes.notSelected
+              }
               onClick={() => {
                 if (switchLanguage) {
                   switchLanguage(lang);
@@ -88,6 +87,9 @@ const Header = () => {
             >
               <span className={classes.msg}>
                 {i18Trans[ndx]("headerData.startBtn.1")}
+              </span>
+              <span className={classes.icon}>
+                <FontAwesomeIcon icon={faHome} />
               </span>
             </button>
           ))}
