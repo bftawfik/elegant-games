@@ -11,14 +11,15 @@ import { AppDataContext } from "../../Components/AppDataProvider/AppDataProvider
 import classes from "./Home.module.scss";
 
 const Home = () => {
-  const { userData }: typeAppProviderValue = useContext(AppDataContext);
-  
+  const { userData, searchParams }: typeAppProviderValue =
+    useContext(AppDataContext);
+
   return userData?.isSubscribed ? (
     <FulscrnWrpr className={classes.Home}>
       <GamesGrid card={GameThumbBox} />
     </FulscrnWrpr>
   ) : (
-    <Navigate to="/login" replace={true} />
+    <Navigate to={`/login?${searchParams?.toString()}`} replace={true} />
   );
 };
 

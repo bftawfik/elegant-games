@@ -28,6 +28,7 @@ type typeAppProviderValue = {
   usedCountriesCodes?: typeUsedCountriesCodes;
   registerCardData?: typeRegisterCardData;
   externalUrl?: undefined | string;
+  searchParams?: URLSearchParams;
   language?: string;
   switchLanguage?: (value: string | undefined) => void;
 };

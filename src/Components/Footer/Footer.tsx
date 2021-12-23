@@ -18,7 +18,7 @@ const Footer = () => {
   const { t, i18n } = useTranslation();
   const en = i18n.getFixedT("en");
   const { productId } = defaults;
-  const { socialIcons, internalLinks }: typeAppProviderValue =
+  const { socialIcons, internalLinks, searchParams }: typeAppProviderValue =
     useContext(AppDataContext);
   const [showFooter, setShowFooter] = useState<boolean | undefined>(undefined);
 
@@ -58,7 +58,7 @@ const Footer = () => {
             {internalLinks &&
               internalLinks.map(({ url }, ndx) => (
                 <li key={ndx}>
-                  <Link to={url}>
+                  <Link to={`${url}?${searchParams?.toString()}`}>
                     {t(`footerData.internalLinks.link${ndx}.1`)}
                   </Link>
                   {ndx + 1 < internalLinks.length && <span>-</span>}

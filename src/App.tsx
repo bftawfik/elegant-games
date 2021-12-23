@@ -31,8 +31,9 @@ function App() {
   } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-
+  const [searchParams, setSearchParams] = useState<URLSearchParams>(
+    new URLSearchParams(location.search)
+  );
   const [paramLang, token] = extractParams(searchParams, ["lang", "token"]);
   const [userData, setUserData] = useState<typeUserData>({
     isSubscribed: undefined,
@@ -92,8 +93,12 @@ function App() {
     // console.log("finalLang = ", finalLang);
     // console.log("resolvedLanguage = ", resolvedLanguage);
     if (finalLang) {
-      searchParams.set("lang", finalLang);
-      navigate(`${location.pathname}?${searchParams.toString()}`);
+      const newSearchParams: URLSearchParams = new URLSearchParams(
+        searchParams.toString()
+      );
+      newSearchParams.set("lang", finalLang);
+      setSearchParams(newSearchParams);
+      navigate(`${location.pathname}?${newSearchParams.toString()}`);
       localStorage.setItem(`${enProductName}Lang`, finalLang);
       setLanguage(finalLang);
       document?.querySelector("html")?.setAttribute("lang", finalLang);
@@ -128,6 +133,7 @@ function App() {
           usedCountriesCodes,
           registerCardData,
           externalUrl,
+          searchParams,
           language: language || defaultLang,
           switchLanguage,
         }}
