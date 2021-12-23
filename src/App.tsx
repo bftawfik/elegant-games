@@ -92,6 +92,8 @@ function App() {
     // console.log("finalLang = ", finalLang);
     // console.log("resolvedLanguage = ", resolvedLanguage);
     if (finalLang) {
+      searchParams.set("lang", finalLang);
+      navigate(`${location.pathname}?${searchParams.toString()}`);
       localStorage.setItem(`${enProductName}Lang`, finalLang);
       setLanguage(finalLang);
       document?.querySelector("html")?.setAttribute("lang", finalLang);
