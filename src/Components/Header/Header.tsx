@@ -21,31 +21,25 @@ const Header = () => {
   const { t, i18n } = useTranslation();
   const { productId } = defaults;
   const i18Trans = languagesData.map((lang) => i18n.getFixedT(lang));
-  const headerCases = {
-    SHOW_WITHOUT_ANIMATION: "SHOW_WITHOUT_ANIMATION",
-    HIDE_WITHOUT_ANIMATION: "HIDE_WITHOUT_ANIMATION",
-    SHOW_WITH_ANIMATION: "SHOW_WITH_ANIMATION",
-    HIDE_WITH_ANIMATION: "HIDE_WITH_ANIMATION",
-  };
-  const { language, switchLanguage }: typeAppProviderValue =
-    useContext(AppDataContext);
-  const [showHeader, setShowHeader] = useState<string>(
-    location?.pathname === "/"
-      ? headerCases.SHOW_WITHOUT_ANIMATION
-      : headerCases.HIDE_WITHOUT_ANIMATION
-  );
+  const {
+    language,
+    switchLanguage,
+    showHeader,
+    changeShowHeader,
+    headerCases,
+  }: typeAppProviderValue = useContext(AppDataContext);
 
   return (
     <>
-      <Backdrop showBackdrop={showHeader} />
+      <Backdrop />
       <div
         className={[
           classes.Header,
-          showHeader === headerCases.SHOW_WITH_ANIMATION
+          showHeader === headerCases?.SHOW_WITH_ANIMATION
             ? classes.grow
-            : showHeader === headerCases.HIDE_WITH_ANIMATION
+            : showHeader === headerCases?.HIDE_WITH_ANIMATION
             ? classes.shrink
-            : showHeader === headerCases.HIDE_WITHOUT_ANIMATION
+            : showHeader === headerCases?.HIDE_WITHOUT_ANIMATION
             ? classes.hide
             : undefined,
         ].join(" ")}
@@ -66,21 +60,26 @@ const Header = () => {
                 }
                 if (location?.pathname === "/") {
                   if (
-                    showHeader === headerCases.HIDE_WITH_ANIMATION ||
-                    showHeader === headerCases.HIDE_WITHOUT_ANIMATION
+                    showHeader === headerCases?.HIDE_WITH_ANIMATION ||
+                    showHeader === headerCases?.HIDE_WITHOUT_ANIMATION
                   ) {
-                    setShowHeader(headerCases.SHOW_WITH_ANIMATION);
+                    changeShowHeader &&
+                      changeShowHeader(headerCases?.SHOW_WITH_ANIMATION);
                   } else {
-                    setShowHeader(headerCases.HIDE_WITH_ANIMATION);
+                    changeShowHeader &&
+                      changeShowHeader(headerCases?.HIDE_WITH_ANIMATION);
                   }
                 } else {
                   if (
-                    showHeader === headerCases.HIDE_WITHOUT_ANIMATION ||
-                    showHeader === headerCases.HIDE_WITH_ANIMATION
+                    showHeader === headerCases?.HIDE_WITHOUT_ANIMATION ||
+                    showHeader === headerCases?.HIDE_WITH_ANIMATION
                   ) {
-                    // navigate("/");
+                    navigate("/");
+                    changeShowHeader &&
+                      changeShowHeader(headerCases?.HIDE_WITHOUT_ANIMATION);
                   } else {
-                    setShowHeader(headerCases.SHOW_WITH_ANIMATION);
+                    changeShowHeader &&
+                      changeShowHeader(headerCases?.SHOW_WITH_ANIMATION);
                   }
                 }
               }}

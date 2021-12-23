@@ -1,30 +1,28 @@
-import classes from "./Backdrop.module.scss";
+import { useContext } from "react";
 import { percentToHex } from "../../Services/Helpers";
 
-import type { typeBackdropProps } from "../../Types";
+import type { typeBackdropProps, typeAppProviderValue } from "../../Types";
 
+import { AppDataContext } from "../AppDataProvider/AppDataProvider";
+
+import classes from "./Backdrop.module.scss";
 const Backdrop = ({
   zndx = 1000,
   bgOpacity = 0.85,
   backgroundColorHex = "#FFFFFF",
-  showBackdrop,
   onClickHandler,
 }: typeBackdropProps) => {
-  const headerCases = {
-    SHOW_WITHOUT_ANIMATION: "SHOW_WITHOUT_ANIMATION",
-    HIDE_WITHOUT_ANIMATION: "HIDE_WITHOUT_ANIMATION",
-    SHOW_WITH_ANIMATION: "SHOW_WITH_ANIMATION",
-    HIDE_WITH_ANIMATION: "HIDE_WITH_ANIMATION",
-  };
+  const { showHeader, headerCases }: typeAppProviderValue =
+    useContext(AppDataContext);
   return (
     <button
       className={[
         classes.Backdrop,
-        showBackdrop === headerCases.SHOW_WITH_ANIMATION
+        showHeader === headerCases?.SHOW_WITH_ANIMATION
           ? classes.fadeIn
-          : showBackdrop === headerCases.HIDE_WITH_ANIMATION
+          : showHeader === headerCases?.HIDE_WITH_ANIMATION
           ? classes.fadeOut
-          : showBackdrop === headerCases.HIDE_WITHOUT_ANIMATION
+          : showHeader === headerCases?.HIDE_WITHOUT_ANIMATION
           ? classes.hide
           : undefined,
       ].join(" ")}

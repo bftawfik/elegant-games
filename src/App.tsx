@@ -21,8 +21,15 @@ import {
   languagesData,
   defaults,
 } from "./Mocks";
-import { typeUserData } from "./Types";
+import { typeUserData, typeHeaderCases } from "./Types";
 import "./App.scss";
+
+const headerCases: typeHeaderCases = {
+  SHOW_WITHOUT_ANIMATION: "SHOW_WITHOUT_ANIMATION",
+  HIDE_WITHOUT_ANIMATION: "HIDE_WITHOUT_ANIMATION",
+  SHOW_WITH_ANIMATION: "SHOW_WITH_ANIMATION",
+  HIDE_WITH_ANIMATION: "HIDE_WITH_ANIMATION",
+};
 
 function App() {
   const { lang: defaultLang, productId } = defaults;
@@ -42,6 +49,12 @@ function App() {
   const { isSubscribed }: typeUserData = userData;
   const [externalUrl, setExternalUrl] = useState<string | undefined>(undefined);
   const [language, setLanguage] = useState<string | undefined>(undefined);
+  const [showHeader, setShowHeader] = useState<string | undefined>(
+    headerCases.SHOW_WITHOUT_ANIMATION
+  );
+  // location?.pathname === "/"
+  //   ? headerCases.SHOW_WITHOUT_ANIMATION
+  //   : headerCases.HIDE_WITHOUT_ANIMATION;
 
   const checkSessionStorage = () => {
     const sessionUserData = sessionStorage.getItem("userData");
@@ -53,6 +66,11 @@ function App() {
         data: undefined,
       });
     }
+  };
+
+  const changeShowHeader = (value: string | undefined) => {
+    console.log(value);
+    setShowHeader(value);
   };
 
   const checkToken = useCallback(async (token: string) => {
@@ -133,9 +151,12 @@ function App() {
           usedCountriesCodes,
           registerCardData,
           externalUrl,
+          showHeader,
+          changeShowHeader,
           searchParams,
           language: language || defaultLang,
           switchLanguage,
+          headerCases,
         }}
       >
         <Router />

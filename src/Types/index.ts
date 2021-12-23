@@ -1,5 +1,5 @@
-import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 import React from "react";
+import { IconDefinition } from "@fortawesome/free-brands-svg-icons";
 
 type typeSingleSocialIconData = {
   name: string;
@@ -27,17 +27,19 @@ type typeAppProviderValue = {
   allCountriesData?: typeAllCountriesData;
   usedCountriesCodes?: typeUsedCountriesCodes;
   registerCardData?: typeRegisterCardData;
+  showHeader?: string | undefined;
+  changeShowHeader?: (value: string | undefined) => void;
   externalUrl?: undefined | string;
   searchParams?: URLSearchParams;
   language?: string;
   switchLanguage?: (value: string | undefined) => void;
+  headerCases?: typeHeaderCases;
 };
 
 type typeBackdropProps = {
   zndx?: number;
   bgOpacity?: number;
   backgroundColorHex?: string;
-  showBackdrop: string;
   onClickHandler?: React.MouseEventHandler | undefined;
 };
 
@@ -119,6 +121,9 @@ type typeCustomOptionProps = any;
 
 type typeDefaultsObj = { lang: string; productId: number };
 
+type typeHeaderCases = {
+  [key: string]: string;
+};
 export type {
   typeSocialIcons,
   typeInternalLinks,
@@ -140,4 +145,5 @@ export type {
   typeCustomListProps,
   typeCustomOptionProps,
   typeDefaultsObj,
+  typeHeaderCases,
 };
