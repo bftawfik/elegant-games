@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,6 @@ import classes from "./Header.module.scss";
 
 const Header = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { productId } = defaults;
   const i18Trans = languagesData.map((lang) => i18n.getFixedT(lang));
