@@ -11,15 +11,30 @@ import { AppDataContext } from "../../Components/AppDataProvider/AppDataProvider
 import classes from "./Home.module.scss";
 
 const Home = () => {
-  const { userData, searchParams }: typeAppProviderValue =
-    useContext(AppDataContext);
+  const {
+    userData,
+    searchParams,
+    showHeader,
+    changeShowHeader,
+    headerCases,
+  }: typeAppProviderValue = useContext(AppDataContext);
+
+  const changeUrl = () => {
+    if (
+      showHeader === headerCases?.SHOW_WITH_ANIMATION ||
+      showHeader === headerCases?.SHOW_WITHOUT_ANIMATION
+    ) {
+      changeShowHeader && changeShowHeader(headerCases?.HIDE_WITHOUT_ANIMATION);
+    }
+    return `/login?${searchParams?.toString()}`;
+  };
 
   return userData?.isSubscribed ? (
     <FulscrnWrpr className={classes.Home}>
       <GamesGrid card={GameThumbBox} />
     </FulscrnWrpr>
   ) : (
-    <Navigate to={`/login?${searchParams?.toString()}`} replace={true} />
+    <Navigate to={changeUrl()} replace={true} />
   );
 };
 
