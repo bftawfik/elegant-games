@@ -29,6 +29,7 @@ type typeAppProviderValue = {
   registerCardData?: typeRegisterCardData;
   externalUrl?: undefined | string;
   language?: string;
+  switchLanguage?: (value: string | undefined) => void;
 };
 
 type typeBackdropProps = {

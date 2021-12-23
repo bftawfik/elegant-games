@@ -18,15 +18,16 @@ import {
   allCountriesData,
   usedCountriesCodes,
   registerCardData,
+  languagesData,
   defaults,
 } from "./Mocks";
 import { typeUserData } from "./Types";
 import "./App.scss";
 
 function App() {
-  const { lang: defaultLang } = defaults;
+  const { lang: defaultLang, productId } = defaults;
   const {
-    i18n: { resolvedLanguage, changeLanguage },
+    i18n: { resolvedLanguage, changeLanguage, getFixedT },
   } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,7 +40,7 @@ function App() {
   });
   const { isSubscribed }: typeUserData = userData;
   const [externalUrl, setExternalUrl] = useState<string | undefined>(undefined);
-  const [language, setLanguage] = useState(paramLang || defaultLang);
+  const [language, setLanguage] = useState<string | undefined>(undefined);
 
   const checkSessionStorage = () => {
     const sessionUserData = sessionStorage.getItem("userData");
@@ -60,7 +61,10 @@ function App() {
       const { decryptedObj, isSubscribed } = data;
       setUserData({
         isSubscribed: isSubscribed,
-        data: { ...decryptedObj, urlToken: token },
+        data: {
+          ...decryptedObj,
+          urlToken: token,
+        },
       });
       if (!isSubscribed) {
         setExternalUrl("http://www.google.com");
@@ -71,6 +75,33 @@ function App() {
     }
   }, []);
 
+  const switchLanguage = (newLang: string | undefined) => {
+    const enProductName = getFixedT("en")(`products.${productId}`)
+      .split(" ")
+      .join("");
+    const localLang = localStorage.getItem(`${enProductName}Lang`);
+    const validNewLang = !!languagesData.find((l) => l === newLang);
+    const finalLang = validNewLang
+      ? newLang
+      : localLang
+      ? localLang
+      : defaultLang;
+    // console.log("newLang = ", newLang);`
+    // console.log("localLang = ", localLang);
+    // console.log(validNewLang);
+    // console.log("finalLang = ", finalLang);
+    // console.log("resolvedLanguage = ", resolvedLanguage);
+    if (finalLang) {
+      localStorage.setItem(`${enProductName}Lang`, finalLang);
+      setLanguage(finalLang);
+      document?.querySelector("html")?.setAttribute("lang", finalLang);
+      if (resolvedLanguage !== finalLang) {
+        changeLanguage(finalLang);
+      }
+    }
+    return finalLang;
+  };
+
   useEffect(() => {
     if (isSubscribed === undefined) {
       checkToken(token);
@@ -78,24 +109,7 @@ function App() {
   }, [isSubscribed, token, checkToken]);
 
   useEffect(() => {
-    if (paramLang) {
-      if (document?.querySelector("html")?.lang !== paramLang) {
-        document?.querySelector("html")?.setAttribute("lang", paramLang);
-      }
-    } else {
-      document?.querySelector("html")?.setAttribute("lang", defaultLang);
-      changeLanguage(defaultLang);
-    }
-  }, [paramLang, defaultLang]);
-
-  useEffect(() => {
-    //   if (resolvedLanguage !== language) {
-    //     changeLanguage(language);
-    //     searchParams.set("lang", language);
-    //     const newPath = location.pathname.concat("?", searchParams.toString());
-    //     console.log(newPath);
-    //     navigate(newPath, { replace: true });
-    //   }
+    switchLanguage(paramLang);
   }, []);
 
   return (
@@ -113,6 +127,7 @@ function App() {
           registerCardData,
           externalUrl,
           language: language || defaultLang,
+          switchLanguage,
         }}
       >
         <Router />
