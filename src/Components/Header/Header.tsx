@@ -27,16 +27,13 @@ const Header = () => {
     SHOW_WITH_ANIMATION: "SHOW_WITH_ANIMATION",
     HIDE_WITH_ANIMATION: "HIDE_WITH_ANIMATION",
   };
-  const { language }: typeAppProviderValue = useContext(AppDataContext);
+  const { language, switchLanguage }: typeAppProviderValue =
+    useContext(AppDataContext);
   const [showHeader, setShowHeader] = useState<string>(
     location?.pathname === "/"
       ? headerCases.SHOW_WITHOUT_ANIMATION
       : headerCases.HIDE_WITHOUT_ANIMATION
   );
-
-  const switchLang = (lang: string) => {
-    i18n.changeLanguage(lang);
-  };
 
   return (
     <>
@@ -65,7 +62,9 @@ const Header = () => {
               key={ndx}
               className={lang === language ? classes.selected : undefined}
               onClick={() => {
-                switchLang(lang);
+                if (switchLanguage) {
+                  switchLanguage(lang);
+                }
                 if (location?.pathname === "/") {
                   if (
                     showHeader === headerCases.HIDE_WITH_ANIMATION ||
