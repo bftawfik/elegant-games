@@ -69,7 +69,6 @@ function App() {
   };
 
   const changeShowHeader = (value: string | undefined) => {
-    console.log(value);
     setShowHeader(value);
   };
 
