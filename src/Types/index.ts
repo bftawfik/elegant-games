@@ -30,7 +30,7 @@ type typeAppProviderValue = {
   showHeader?: string | undefined;
   changeShowHeader?: (value: string | undefined) => void;
   externalUrl?: undefined | string;
-  searchParams?: URLSearchParams;
+  searchParams?: string;
   language?: string;
   switchLanguage?: (value: string | undefined) => void;
   headerCases?: typeHeaderCases;

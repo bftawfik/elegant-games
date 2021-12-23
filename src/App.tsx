@@ -38,10 +38,16 @@ function App() {
   } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchParams, setSearchParams] = useState<URLSearchParams>(
-    new URLSearchParams(location.search)
+
+  const { search, pathname } = location;
+
+  const [searchParams, setSearchParams] = useState<string>(
+    new URLSearchParams(search).toString()
   );
-  const [paramLang, token] = extractParams(searchParams, ["lang", "token"]);
+  const [paramLang, token] = extractParams(new URLSearchParams(searchParams), [
+    "lang",
+    "token",
+  ]);
   const [userData, setUserData] = useState<typeUserData>({
     isSubscribed: undefined,
     data: undefined,
@@ -52,9 +58,6 @@ function App() {
   const [showHeader, setShowHeader] = useState<string | undefined>(
     headerCases.SHOW_WITHOUT_ANIMATION
   );
-  // location?.pathname === "/"
-  //   ? headerCases.SHOW_WITHOUT_ANIMATION
-  //   : headerCases.HIDE_WITHOUT_ANIMATION;
 
   const checkSessionStorage = () => {
     const sessionUserData = sessionStorage.getItem("userData");
@@ -93,38 +96,53 @@ function App() {
     }
   }, []);
 
-  const switchLanguage = (newLang: string | undefined) => {
-    const enProductName = getFixedT("en")(`products.${productId}`)
-      .split(" ")
-      .join("");
-    const localLang = localStorage.getItem(`${enProductName}Lang`);
-    const validNewLang = !!languagesData.find((l) => l === newLang);
-    const finalLang = validNewLang
-      ? newLang
-      : localLang
-      ? localLang
-      : defaultLang;
-    // console.log("newLang = ", newLang);`
-    // console.log("localLang = ", localLang);
-    // console.log(validNewLang);
-    // console.log("finalLang = ", finalLang);
-    // console.log("resolvedLanguage = ", resolvedLanguage);
-    if (finalLang) {
-      const newSearchParams: URLSearchParams = new URLSearchParams(
-        searchParams.toString()
-      );
-      newSearchParams.set("lang", finalLang);
-      setSearchParams(newSearchParams);
-      navigate(`${location.pathname}?${newSearchParams.toString()}`);
-      localStorage.setItem(`${enProductName}Lang`, finalLang);
-      setLanguage(finalLang);
-      document?.querySelector("html")?.setAttribute("lang", finalLang);
-      if (resolvedLanguage !== finalLang) {
-        changeLanguage(finalLang);
+  const switchLanguage = useCallback(
+    (newLang: string | undefined) => {
+      const enProductName = getFixedT("en")(`products.${productId}`)
+        .split(" ")
+        .join("");
+      const localLang = localStorage.getItem(`${enProductName}Lang`);
+      const validNewLang = !!languagesData.find((l) => l === newLang);
+      const finalLang = validNewLang
+        ? newLang
+        : localLang
+        ? localLang
+        : defaultLang;
+      // console.log("newLang = ", newLang);`
+      // console.log("localLang = ", localLang);
+      // console.log(validNewLang);
+      // console.log("finalLang = ", finalLang);
+      // console.log("resolvedLanguage = ", resolvedLanguage);
+      if (finalLang) {
+        const urlSearchParams: URLSearchParams = new URLSearchParams(
+          searchParams
+        );
+        urlSearchParams.set("lang", finalLang);
+        setSearchParams(urlSearchParams.toString());
+        navigate(`${pathname}?${urlSearchParams.toString()}`);
+        localStorage.setItem(`${enProductName}Lang`, finalLang);
+        if (finalLang !== language) {
+          setLanguage(finalLang);
+        }
+        document?.querySelector("html")?.setAttribute("lang", finalLang);
+        if (resolvedLanguage !== finalLang) {
+          changeLanguage(finalLang);
+        }
       }
-    }
-    return finalLang;
-  };
+      return finalLang;
+    },
+    [
+      changeLanguage,
+      defaultLang,
+      navigate,
+      productId,
+      resolvedLanguage,
+      searchParams,
+      getFixedT,
+      pathname,
+      language,
+    ]
+  );
 
   useEffect(() => {
     if (isSubscribed === undefined) {
@@ -134,7 +152,7 @@ function App() {
 
   useEffect(() => {
     switchLanguage(paramLang);
-  }, []);
+  }, [paramLang, switchLanguage]);
 
   return (
     <div className="App">
