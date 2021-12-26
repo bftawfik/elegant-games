@@ -23,6 +23,7 @@ const Login = () => {
 
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
+    try {
     const res = await postCenterLogin(
       `${selectedCountry?.dial_code}${tel}`,
       "ElegantGames",
@@ -30,6 +31,9 @@ const Login = () => {
     );
     const resJson = await res.json();
     console.log(resJson);
+    } catch (error) {
+      console.log(error);
+    }
 
     // if (statusCode === 200) {
     //   const { decryptedObj, isSubscribed } = data;

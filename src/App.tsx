@@ -76,23 +76,27 @@ function App() {
   };
 
   const checkToken = useCallback(async (token: string) => {
-    const res = await postIsSubscribed(token);
-    const { statusCode, data } = await res.json();
-    if (statusCode === 200) {
-      const { decryptedObj, isSubscribed } = data;
-      setUserData({
-        isSubscribed: isSubscribed,
-        data: {
-          ...decryptedObj,
-          urlToken: token,
-        },
-      });
-      if (!isSubscribed) {
-        setExternalUrl("http://www.google.com");
+    try {
+      const res = await postIsSubscribed(token);
+      const { statusCode, data } = await res.json();
+      if (statusCode === 200) {
+        const { decryptedObj, isSubscribed } = data;
+        setUserData({
+          isSubscribed: isSubscribed,
+          data: {
+            ...decryptedObj,
+            urlToken: token,
+          },
+        });
+        if (!isSubscribed) {
+          setExternalUrl("http://www.google.com");
+          checkSessionStorage();
+        }
+      } else {
         checkSessionStorage();
       }
-    } else {
-      checkSessionStorage();
+    } catch (error) {
+      console.error(error);
     }
   }, []);
 
