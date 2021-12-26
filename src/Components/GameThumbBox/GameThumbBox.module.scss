@@ -30,4 +30,16 @@ $count: 4;
       transform: scale(110%, 110%);
     }
   }
+
+  @media screen and(max-width: 800px) {
+    $count: 3;
+    width: calc((100% / #{$count}) - #{$gap});
+    padding-top: calc((100% / #{$count}) - #{$gap});
+  }
+
+  @media screen and(max-width: 640px) {
+    $count: 2;
+    width: calc((100% / #{$count}) - #{$gap});
+    padding-top: calc((100% / #{$count}) - #{$gap});
+  }
 }
