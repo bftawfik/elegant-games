@@ -24,13 +24,13 @@ const Login = () => {
   const onSubmitHandler = async (e: any) => {
     e.preventDefault();
     try {
-    const res = await postCenterLogin(
-      `${selectedCountry?.dial_code}${tel}`,
-      "ElegantGames",
-      1
-    );
-    const resJson = await res.json();
-    console.log(resJson);
+      const res = await postCenterLogin(
+        `${selectedCountry?.dial_code}${tel}`,
+        "ElegantGames",
+        1
+      );
+      const resJson = await res.json();
+      console.log(resJson);
     } catch (error) {
       console.log(error);
     }
