@@ -50,9 +50,10 @@ const Footer = () => {
       </button>
       <div className={classes.footerRow}>
         <div className={classes.footerCol}>
-          <h3>{`${t("footerData.header1.1")} ${en(
-            `products.${productId}`
-          )}`}</h3>
+          <h3>
+            <span>{t("footerData.header1.1")} </span>
+            <span>{en(`products.${productId}`)}</span>
+          </h3>
           <p>{t("footerData.paragraph1.1")}</p>
           <ul className={classes.internalLinks}>
             {internalLinks &&
