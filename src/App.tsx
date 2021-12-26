@@ -142,6 +142,11 @@ function App() {
           setLanguage(finalLang);
         }
         document?.querySelector("html")?.setAttribute("lang", finalLang);
+        if (finalLang === "ar") {
+          document?.querySelector("html")?.setAttribute("dir", "rtl");
+        } else {
+          document?.querySelector("html")?.setAttribute("dir", "ltr");
+        }
         if (resolvedLanguage !== finalLang) {
           changeLanguage(finalLang);
         }
