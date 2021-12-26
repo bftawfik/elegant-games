@@ -72,7 +72,20 @@ function App() {
   };
 
   const changeShowHeader = (value: string | undefined) => {
-    setShowHeader(value);
+    console.log(value);
+    if (value === headerCases.HIDE_WITH_ANIMATION) {
+      setShowHeader(value);
+      setTimeout(() => {
+        setShowHeader(headerCases.HIDE_WITHOUT_ANIMATION);
+      }, 1000);
+    } else if (value === headerCases.SHOW_WITH_ANIMATION) {
+      setShowHeader(value);
+      setTimeout(() => {
+        setShowHeader(headerCases.SHOW_WITHOUT_ANIMATION);
+      }, 1000);
+    } else {
+      setShowHeader(value);
+    }
   };
 
   const checkToken = useCallback(async (token: string) => {
