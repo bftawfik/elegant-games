@@ -46,7 +46,12 @@ const Header = () => {
         <h1>{i18n.getFixedT("en")(`products.${productId}`)}</h1>
         <h2>{t("headerData.header1.1")}</h2>
         <h2>{t("headerData.header2.1")}</h2>
-        <div className={classes.buttonsContainer}>
+        <div
+          className={[
+            classes.buttonsContainer,
+            language === "ar" ? classes.ar : undefined,
+          ].join(" ")}
+        >
           {languagesData.map((lang, ndx) => (
             <button
               key={ndx}
