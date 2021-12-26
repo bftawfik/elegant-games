@@ -20,7 +20,6 @@ const Header = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const { productId } = defaults;
-  const i18Trans = languagesData.map((lang) => i18n.getFixedT(lang));
   const {
     language,
     switchLanguage,
