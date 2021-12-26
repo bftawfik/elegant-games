@@ -85,7 +85,7 @@ const Header = () => {
               }}
             >
               <span className={classes.msg}>
-                {i18Trans[ndx]("headerData.startBtn.1")}
+                {t(`headerData.startBtn.${lang}.1`)}
               </span>
               <span className={classes.icon}>
                 <FontAwesomeIcon icon={faHome} />

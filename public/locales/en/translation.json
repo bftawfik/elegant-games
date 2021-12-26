@@ -11,9 +11,7 @@
     "header2": {
       "1": "Single Partnership."
     },
-    "startBtn": {
-      "1": "Start Now"
-    }
+    "startBtn": { "ar": { "1": "ابدء الان" }, "en": { "1": "Start Now" } }
   },
   "footerData": {
     "header1": {
