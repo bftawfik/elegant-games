@@ -13,16 +13,15 @@ import classes from "./SingleGame.module.scss";
 
 const SingleGame = () => {
   let { gameId } = useParams();
-  const { userData, externalUrl }: typeAppProviderValue =
+  const { userData, externalUrl, gamesData }: typeAppProviderValue =
     useContext(AppDataContext);
   const navigate = useNavigate();
-  if (!userData?.isSubscribed) {
-    navigate("/");
-  }
+  // if (!userData?.isSubscribed) {
+  //   navigate("/");
+  // }
 
   const divRef = useRef<HTMLDivElement>(null);
   const [fullscreen, setFullscreen] = useState<boolean | undefined>(false);
-  
   return userData?.isSubscribed ? (
     <div className={classes.SingleGame} ref={divRef}>
       <button
@@ -60,10 +59,14 @@ const SingleGame = () => {
           <FontAwesomeIcon icon={faExpand} />
         )}
       </button>
-      <iframe
-        src={`https://www.ourfastcdn.com/elegantgames/mygames/${gameId}/HTML5-Game/index.html`}
-        title={gameId}
-      />
+      {gamesData && gameId && (
+        <iframe
+          src={`https://www.ourfastcdn.com/elegantgames/mygames/${
+            gamesData[`${gameId}`]
+          }/HTML5-Game/index.html`}
+          title={gamesData[`${gameId}`]}
+        />
+      )}
     </div>
   ) : (
     <Redirect externalUrl={externalUrl} />
